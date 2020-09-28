@@ -1,29 +1,57 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface ButtonProps {
-  type?: 'border' | 'general';
-  onClick : () => void;
+  type?: 'border' | 'general' | 'light';
+  size?: 'big' | 'normal';
+  onClick: () => void;
 }
 
-const Button: React.FC<ButtonProps> = ({ type = 'general', children, onClick }) => {
+const Button: React.FC<ButtonProps> = ({
+  type = 'general',
+  size = 'normal',
+  children,
+  onClick,
+}) => {
   if (type === 'border') {
     return <WrapperBorder onClick={onClick}>{children}</WrapperBorder>;
   }
-  return <Wrapper onClick={onClick}>{children}</Wrapper>;
+  return (
+    <Wrapper size={size} type={type} onClick={onClick}>
+      {children}
+    </Wrapper>
+  );
 };
 
 export default Button;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ type: string; size: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
-  height: 36px;
   box-sizing: border-box;
-  border-radius: 6px;
-  background-image: linear-gradient(to bottom, #00b1ff, #0077f5);
+  padding: 0 16px;
+  ${p =>
+    p.type === 'light'
+      ? css`
+          background: linear-gradient(180deg, #eaf6ff 0%, #b3dfff 100%);
+          color: #000;
+        `
+      : css`
+          color: #fff;
+          background-image: linear-gradient(to bottom, #00b1ff, #0077f5);
+        `}
+  ${p =>
+    p.size === 'big'
+      ? css`
+          height: 56px;
+          font-size: 20px;
+          border-radius: 14px;
+        `
+      : css`
+          height: 36px;
+          border-radius: 6px;
+        `}
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Helmet} from "react-helmet";
-import Dashboard from "./features/dashboard";
+import Routes from './features/routes';
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
             <title>AppBuildy</title>
             <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
         </Helmet>
-      <Dashboard />
+      <Routes />
     </div>
   );
 }
