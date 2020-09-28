@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Input from '../../../ui/input';
 import Button from '../../../ui/button';
 import tokenGif from './token.gif';
-import axios from "axios";
+import axios from 'axios';
 
 import {
   Wrapper,
@@ -28,11 +28,12 @@ const Token = ({ setStepBase }) => {
       const authToken = localStorage.getItem('jwt');
 
       axios.patch('/api/user', {
-        headers: { 'Authentication': `Bearer ${authToken}` },
+        headers: { Authentication: `Bearer ${authToken}` },
         user: {
-          airtable_api_key: pureToken
-        }
+          airtable_api_key: pureToken,
+        },
       });
+
       setStepBase();
     }
   };
