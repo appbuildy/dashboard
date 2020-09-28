@@ -5,13 +5,14 @@ import logoSvg from '../../assets/authorization/logo-full.svg';
 import facebook from '../../assets/authorization/facebook.svg';
 import google from '../../assets/authorization/google.svg';
 import { Input, Button, Error } from '../../ui';
-import { Link } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { emailRegEx } from '../lib/emailRegEx';
-import { login, ILoginResponse } from './actions';
+import { register } from './actions';
 
-const Login = () => {
+const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [secondPassword, setSecondPassword] = useState('');
   const [error, setError] = useState('');
 
   const handleGoogle = () => {
@@ -23,11 +24,14 @@ const Login = () => {
 
   const isValid = (): boolean => {
     const emailError = !emailRegEx.test(email) ? 'Incorrect e-mail format' : '';
-    const passwordError = password.length < 4 ? 'Wrong e-mail or password' : '';
+    const passwordError =
+      password.length < 4 ? 'Minimum password length is 4' : '';
+    const secondPasswordError =
+      password !== secondPassword ? 'Passwords must be the same' : '';
 
-    setError(emailError || passwordError || '');
+    setError(emailError || passwordError || secondPasswordError || '');
 
-    return !emailError && !passwordError;
+    return !emailError && !passwordError && !secondPasswordError;
   };
 
   const handleCredentials = () => {
@@ -39,22 +43,22 @@ const Login = () => {
         password: password,
       };
 
-      login(user)
-        .then((response: ILoginResponse) =>
-          localStorage.setItem('jwt', response.jwt),
-        )
+      register(user)
+        .then(() => history.push('/login'))
         .catch(() => {
-          setError('Wrong e-mail or password');
+          setError('This email already exist');
         });
     }
   };
+
+  const history = useHistory();
 
   return (
     <Wrapper>
       <Container>
         <Logo src={logoSvg} />
-        <Form>
-          <Title>Log In</Title>
+        <Form onSubmit={handleCredentials}>
+          <Title>Sign Up</Title>
           <ButtonContainer>
             <Button size="big" type="light" onClick={handleGoogle}>
               <ButtonAlign>
@@ -102,17 +106,23 @@ const Login = () => {
               size="big"
               placeholder="Password"
             />
+            <SizedBox />
+            <Input
+              value={secondPassword}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setSecondPassword(e.target.value)
+              }
+              size="big"
+              placeholder="Password Again"
+            />
             <BigSizedBox />
             <Button onClick={handleCredentials} size={'big'}>
               Continue
             </Button>
           </Inputs>
           <Actions>
-            <Link to="/signup">
-              <ActionText>Don’t have an account?</ActionText>
-            </Link>
-            <Link to="">
-              <ActionText>Forgot Password?</ActionText>
+            <Link to="/login">
+              <ActionText>Already have an account?</ActionText>
             </Link>
           </Actions>
         </Form>
@@ -121,7 +131,7 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
 
 const Wrapper = styled.div`
   background-image: url('${bgSvg}');
@@ -171,7 +181,7 @@ const CenterHelper = styled.div`
   flex: 1;
 `;
 
-const Form = styled.div`
+const Form = styled.form`
   padding: 40px 60px;
   border-radius: 25px;
   box-shadow: 0 10px 60px rgba(0, 0, 0, 0.1);
@@ -197,7 +207,7 @@ const Inputs = styled.div``;
 const Actions = styled.div`
   margin-top: 32px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 const ActionText = styled.div`
