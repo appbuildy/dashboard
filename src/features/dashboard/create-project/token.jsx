@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import Input from '../../../ui/input';
-import Button from '../../../ui/button';
+import { Input, Button } from '../../../ui';
 import tokenGif from './token.gif';
 import axios from 'axios';
 

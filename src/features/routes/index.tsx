@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import Dashboard from '../dashboard';
 import Login from '../login';
+import Register from '../register';
 import NotFound from './not-found';
 import PrivateRoute from './private-route';
 
@@ -22,6 +23,9 @@ const Routes = () => {
         </Route>
         <Route path="/login">
           <Login />
+        </Route>
+        <Route path="/signup">
+          <Register />
         </Route>
         <Route path="*">
           <NotFound />
