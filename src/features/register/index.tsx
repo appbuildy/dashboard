@@ -49,7 +49,6 @@ const Register = () => {
 
       register(user)
         .then((response: IRegisterResponse) => {
-          console.log(response);
           localStorage.setItem('jwt', response.jwt);
           history.push('/dashboard');
         })
