@@ -10,6 +10,7 @@ import Login from '../login';
 import Register from '../register';
 import NotFound from './not-found';
 import PrivateRoute from './private-route';
+import AuthorizationRoute from './authorization-route';
 
 const Routes = () => {
   return (
@@ -21,12 +22,12 @@ const Routes = () => {
         <Route exact path="/">
           <Redirect to="dashboard" />
         </Route>
-        <Route path="/login">
+        <AuthorizationRoute path="/login">
           <Login />
-        </Route>
-        <Route path="/signup">
+        </AuthorizationRoute>
+        <AuthorizationRoute path="/signup">
           <Register />
-        </Route>
+        </AuthorizationRoute>
         <Route path="*">
           <NotFound />
         </Route>

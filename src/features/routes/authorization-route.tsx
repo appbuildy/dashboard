@@ -1,17 +1,17 @@
 import React from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 
-const PrivateRoute: React.FC<RouteProps> = ({ children, ...rest }) => {
+const AuthorizationRoute: React.FC<RouteProps> = ({ children, ...rest }) => {
   const token = localStorage.getItem('jwt');
 
-  if (!token) {
+  if (token) {
     return (
       <Redirect
         to={{
-          pathname: '/login',
+          pathname: '/dashboard',
           state: { from: rest.location },
         }}
-    />
+      />
     )
   }
 
@@ -20,4 +20,4 @@ const PrivateRoute: React.FC<RouteProps> = ({ children, ...rest }) => {
   );
 };
 
-export default PrivateRoute;
+export default AuthorizationRoute;

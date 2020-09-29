@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 import { Layout } from 'antd';
 import logo from './logo.svg';
 
 const { Header: AntHeader } = Layout;
 
 const Header = () => {
+  const history = useHistory();
   return (
     <AntHeader style={{ background: '#fff' }}>
       <Container>
@@ -19,12 +21,36 @@ const Header = () => {
           </ItemList>
         </LogoContainer>
         <LoginInfo>sergey@appbuildy.com</LoginInfo>
+        {/*заглушка*/}
+        <ExitButton
+          onClick={() => {
+            localStorage.removeItem('jwt');
+            history.push('/login');
+          }}
+        >
+          exit
+        </ExitButton>
       </Container>
     </AntHeader>
   );
 };
 
 export default Header;
+
+// заглушка
+const ExitButton = styled.div`
+  box-sizing: border-box;
+  text-align: center;
+  background-color: #007aff;
+  color: #fff;
+  line-height: 12px;
+  padding: 5px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+`;
 
 const Container = styled.div`
   display: flex;

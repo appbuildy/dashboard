@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Input, PasswordInput, Button, Error } from '../../ui';
 import { useHistory, Link } from 'react-router-dom';
 import { emailRegEx } from '../lib/emailRegEx';
-import { register } from './actions';
+import { register, IRegisterResponse } from './actions';
 import {
   bgSvg,
   logoSvg,
@@ -16,6 +16,8 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [secondPassword, setSecondPassword] = useState('');
   const [error, setError] = useState('');
+
+  const history = useHistory();
 
   const handleGoogle = () => {
     alert('google');
@@ -46,14 +48,15 @@ const Register = () => {
       };
 
       register(user)
-        .then(() => history.push('/login'))
+        .then((response: IRegisterResponse) => {
+          localStorage.setItem('jwt', response.jwt);
+          history.push('/dashboard');
+        })
         .catch(() => {
           setError('This email already exist');
         });
     }
   };
-
-  const history = useHistory();
 
   return (
     <Wrapper>
