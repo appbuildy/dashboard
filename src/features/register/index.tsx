@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import bgSvg from '../../assets/authorization/bg.svg';
-import logoSvg from '../../assets/authorization/logo-full.svg';
-import facebook from '../../assets/authorization/facebook.svg';
-import google from '../../assets/authorization/google.svg';
-import { Input, Button, Error } from '../../ui';
+import { Input, PasswordInput, Button, Error } from '../../ui';
 import { useHistory, Link } from 'react-router-dom';
 import { emailRegEx } from '../lib/emailRegEx';
 import { register } from './actions';
+import {
+  bgSvg,
+  logoSvg,
+  facebookSvg,
+  googleSvg,
+} from '../../assets/authorization';
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -25,7 +27,7 @@ const Register = () => {
   const isValid = (): boolean => {
     const emailError = !emailRegEx.test(email) ? 'Incorrect e-mail format' : '';
     const passwordError =
-      password.length < 4 ? 'Minimum password length is 4' : '';
+      password.length < 6 ? 'Minimum password length is 6' : '';
     const secondPasswordError =
       password !== secondPassword ? 'Passwords must be the same' : '';
 
@@ -63,7 +65,7 @@ const Register = () => {
             <Button size="big" type="light" onClick={handleGoogle}>
               <ButtonAlign>
                 <Social>
-                  <img alt="google icon" src={google} />
+                  <img alt="google icon" src={googleSvg} />
                 </Social>
                 Continue with Google
                 <CenterHelper />
@@ -73,7 +75,7 @@ const Register = () => {
             <Button size="big" onClick={handleFacebook}>
               <ButtonAlign>
                 <Social>
-                  <img alt="google icon" src={facebook} />
+                  <img alt="google icon" src={facebookSvg} />
                 </Social>
                 Continue with Facebook
                 <CenterHelper />
@@ -98,7 +100,7 @@ const Register = () => {
               placeholder="E-mail"
             />
             <SizedBox />
-            <Input
+            <PasswordInput
               value={password}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setPassword(e.target.value)
@@ -107,7 +109,7 @@ const Register = () => {
               placeholder="Password"
             />
             <SizedBox />
-            <Input
+            <PasswordInput
               value={secondPassword}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setSecondPassword(e.target.value)
@@ -218,6 +220,6 @@ const ActionText = styled.div`
   transition: all 0.2s ease-in-out;
 
   :hover {
-    opacity: 0.7;
+    opacity: 0.2;
   }
 `;

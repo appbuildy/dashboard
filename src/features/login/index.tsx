@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import bgSvg from '../../assets/authorization/bg.svg';
-import logoSvg from '../../assets/authorization/logo-full.svg';
-import facebook from '../../assets/authorization/facebook.svg';
-import google from '../../assets/authorization/google.svg';
-import { Input, Button, Error } from '../../ui';
+import { Input, PasswordInput, Button, Error } from '../../ui';
 import { Link } from 'react-router-dom';
 import { emailRegEx } from '../lib/emailRegEx';
 import { login, ILoginResponse } from './actions';
+import {
+  bgSvg,
+  logoSvg,
+  facebookSvg,
+  googleSvg,
+} from '../../assets/authorization';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -23,7 +25,7 @@ const Login = () => {
 
   const isValid = (): boolean => {
     const emailError = !emailRegEx.test(email) ? 'Incorrect e-mail format' : '';
-    const passwordError = password.length < 4 ? 'Wrong e-mail or password' : '';
+    const passwordError = password.length < 6 ? 'Wrong e-mail or password' : '';
 
     setError(emailError || passwordError || '');
 
@@ -40,9 +42,9 @@ const Login = () => {
       };
 
       login(user)
-        .then((response: ILoginResponse) =>
-          localStorage.setItem('jwt', response.jwt),
-        )
+        .then((response: ILoginResponse) => {
+            localStorage.setItem('jwt', response.jwt);
+        })
         .catch(() => {
           setError('Wrong e-mail or password');
         });
@@ -59,7 +61,7 @@ const Login = () => {
             <Button size="big" type="light" onClick={handleGoogle}>
               <ButtonAlign>
                 <Social>
-                  <img alt="google icon" src={google} />
+                  <img alt="google icon" src={googleSvg} />
                 </Social>
                 Continue with Google
                 <CenterHelper />
@@ -69,7 +71,7 @@ const Login = () => {
             <Button size="big" onClick={handleFacebook}>
               <ButtonAlign>
                 <Social>
-                  <img alt="google icon" src={facebook} />
+                  <img alt="google icon" src={facebookSvg} />
                 </Social>
                 Continue with Facebook
                 <CenterHelper />
@@ -94,7 +96,7 @@ const Login = () => {
               placeholder="E-mail"
             />
             <SizedBox />
-            <Input
+            <PasswordInput
               value={password}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setPassword(e.target.value)
@@ -208,6 +210,6 @@ const ActionText = styled.div`
   transition: all 0.2s ease-in-out;
 
   :hover {
-    opacity: 0.7;
+    opacity: 0.2;
   }
 `;
