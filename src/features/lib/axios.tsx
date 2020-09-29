@@ -9,8 +9,18 @@ export const initializeAxios = () => {
 
 axios.interceptors.request.use((config: any) => {
   const token = localStorage.getItem('jwt');
-  if (token !== null) {
+  if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
 });
+
+axios.interceptors.response.use(
+  (e) => e,
+  (error: any) => {
+    if (error.response.status === 401) {
+      localStorage.removeItem('jwt');
+    }
+    return Promise.reject(error);
+  },
+);

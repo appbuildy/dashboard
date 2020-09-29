@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Input, PasswordInput, Button, Error } from '../../ui';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { emailRegEx } from '../lib/emailRegEx';
 import { login, ILoginResponse } from './actions';
 import {
@@ -15,6 +15,8 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+
+  const history = useHistory();
 
   const handleGoogle = () => {
     alert('google');
@@ -43,7 +45,8 @@ const Login = () => {
 
       login(user)
         .then((response: ILoginResponse) => {
-            localStorage.setItem('jwt', response.jwt);
+          localStorage.setItem('jwt', response.jwt);
+          history.push('/dashboard');
         })
         .catch(() => {
           setError('Wrong e-mail or password');
