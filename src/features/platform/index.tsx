@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import 'antd/dist/antd.css';
 import Iframe from 'react-iframe';
 
@@ -14,12 +15,17 @@ const Platform = (/*props: IPlatform*/) => {
   // const { id } = props.match.params;
 
   return (
-    <Iframe
+    <IframeStyled
       url="https://www.appbuildy.com/web/index.html"
-      width={`${window.innerWidth}px`}
-      height={`${window.innerHeight}px`}
     />
   );
 };
 
 export default Platform;
+
+
+const IframeStyled = styled(Iframe)`
+    border: none;
+    width: 100%;
+    height: 100vh;
+`;
