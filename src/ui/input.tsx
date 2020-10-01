@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 interface IInputProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
-  size: string;
+  size?: string;
   placeholder: string;
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 
-const PrivateRoute: React.FC<RouteProps> = ({ children, ...rest }) => {
+const PrivateRoute: React.FC<RouteProps> = ({ component, ...rest }) => {
   const token = localStorage.getItem('jwt');
 
   if (!token) {
@@ -16,7 +16,7 @@ const PrivateRoute: React.FC<RouteProps> = ({ children, ...rest }) => {
   }
 
   return (
-    <Route {...rest}>{children}</Route>
+    <Route {...rest} component={component} />
   );
 };
 

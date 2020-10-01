@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Input, Button } from '../../../ui';
 import baseGif from './base.gif';
 
@@ -7,27 +7,25 @@ import {
   ActiveZone,
   Title,
   SubTitle,
-  Secured,
   InfoZone,
   GifContainer,
   Error,
 } from './styles';
 
-const Base = ({ setStepBase }) => {
-  const [token, setToken] = useState('');
-  const [error, setError] = useState('');
+interface IBase {
+  value: string;
+  error: string;
+  onChange: (value: string) => void;
+  onSubmit: () => void;
+}
 
-  const [isProtected, setIsProtected] = useState(false);
-  const [protectedPassword, setProtectedPassword] = useState('');
-
-  const handleSubmit = () => {
-    const pureToken = token.trim();
-    if (pureToken === '') {
-      setError('Base link should not be empty');
-    } else {
-      setStepBase();
-    }
-  };
+const Base = (props: IBase) => {
+  const {
+    value,
+    error,
+    onChange,
+    onSubmit,
+  } = props;
 
   return (
     <Wrapper>
@@ -40,25 +38,24 @@ const Base = ({ setStepBase }) => {
           </SubTitle>
           <div style={{ marginLeft: '-3px' }}>
             <Input
-              value={token}
-              onChange={e => setToken(e.target.value)}
+              value={value}
+              onChange={e => onChange(e.target.value)}
               placeholder="Paste the Link here"
             />
           </div>
           <Error>{error}</Error>
-          <Secured onClick={() => setIsProtected(s => !s)}>
-            My shared base is password protected
-          </Secured>
-          {isProtected && (
-            <Input
-              style={{ marginTop: '5px', marginLeft: '-3px' }}
-              value={protectedPassword}
-              onChange={e => setProtectedPassword(e.target.value)}
-              placeholder="Your shared base password"
-            />
-          )}
+          {/*<Secured onClick={() => setIsProtected(s => !s)}>*/}
+          {/*  My shared base is password protected*/}
+          {/*</Secured>*/}
+          {/*{isProtected && (*/}
+          {/*  <Input*/}
+          {/*    value={protectedPassword}*/}
+          {/*    onChange={e => setProtectedPassword(e.target.value)}*/}
+          {/*    placeholder="Your shared base password"*/}
+          {/*  />*/}
+          {/*)}*/}
         </div>
-        <Button onClick={handleSubmit}>Continue</Button>
+        <Button onClick={onSubmit}>Continue</Button>
       </ActiveZone>
       <InfoZone>
         <span>

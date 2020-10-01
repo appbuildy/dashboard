@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Input, Button } from '../../../ui';
 import tokenGif from './token.gif';
-import axios from 'axios';
 
 import {
   Wrapper,
@@ -13,29 +12,20 @@ import {
   Error,
 } from './styles';
 
-const Token = ({ setStepBase }) => {
-  const [token, setToken] = useState('');
-  const [error, setError] = useState('');
+interface IToken {
+  value: string;
+  error: string;
+  onChange: (value: string) => void;
+  onSubmit: () => void;
+}
 
-  const handleSubmit = () => {
-    const pureToken = token.trim();
-    if (pureToken === '') {
-      setError('API Key should not be empty');
-    } else if (!pureToken.startsWith('key')) {
-      setError('API Key should start with key');
-    } else {
-      const authToken = localStorage.getItem('jwt');
-
-      axios.patch('/api/user', {
-        headers: { Authentication: `Bearer ${authToken}` },
-        user: {
-          airtable_api_key: pureToken,
-        },
-      });
-
-      setStepBase();
-    }
-  };
+const Token = (props: IToken) => {
+  const {
+    value,
+    error,
+    onChange,
+    onSubmit,
+  } = props;
 
   return (
     <Wrapper>
@@ -48,15 +38,14 @@ const Token = ({ setStepBase }) => {
           </SubTitle>
           <div style={{ marginLeft: '-3px' }}>
             <Input
-              value={token}
-              onChange={e => setToken(e.target.value)}
+              value={value}
+              onChange={e => onChange(e.target.value)}
               placeholder="Paste your API key here"
             />
           </div>
           <Error>{error}</Error>
-          {/*<Secured>Your API key is protected</Secured>*/}
         </div>
-        <Button onClick={handleSubmit}>Continue</Button>
+        <Button onClick={onSubmit}>Continue</Button>
       </ActiveZone>
       <InfoZone>
         <span>You'll find the API Key in your</span>{' '}
