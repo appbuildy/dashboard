@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Input, Button } from '../../../ui';
 import baseGif from './base.gif';
 
@@ -7,7 +7,6 @@ import {
   ActiveZone,
   Title,
   SubTitle,
-  Secured,
   InfoZone,
   GifContainer,
   Error,

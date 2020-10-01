@@ -18,8 +18,8 @@ const CloseButton = styled.div`
   top: -13px;
   right: -13px;
   position: absolute;
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
   background-color: #ffffff;
@@ -27,15 +27,20 @@ const CloseButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
- 
-  
+
   img {
-    opacity: 0.4;
+    transition: all 0.2s ease-in-out;
+  }
+
+  :hover {
+    img {
+      opacity: 0.7;
+    }
   }
 `;
 
 const CreateProject = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [step, setStep] = useState<string>(STEP_NAME);
 
   const [appName, setAppName] = useState<string>('');
@@ -101,7 +106,7 @@ const CreateProject = () => {
           };
 
           createProject(newProject)
-            .then(x => {
+            .then(() => {
               setIsOpen(false);
             });
         }
@@ -143,25 +148,30 @@ const CreateProject = () => {
 
   };
 
+  const closeModal = () => {
+    setIsOpen(false);
+    setAppName('');
+    setStep(STEP_NAME);
+    setToken('');
+    setTokenError('');
+    setBase('');
+    setBaseError('');
+  }
+
   return (
     <>
       <Modal
         visible={isOpen}
         bodyStyle={{ padding: 0 }}
-        onOk={() => setIsOpen(false)}
-        onCancel={() => {
-          setIsOpen(false);
-          setAppName('');
-          setStep(STEP_NAME);
-          setToken('');
-        }}
+        onOk={closeModal}
+        onCancel={closeModal}
         title={null}
         footer={null}
         closable={false}
         width={step === STEP_NAME ? 800 : 1000}
       >
         {renderStep()}
-        <CloseButton onClick={() => setIsOpen(false)}>
+        <CloseButton onClick={closeModal}>
           <img src={CloseSvg} alt="" />
         </CloseButton>
       </Modal>
