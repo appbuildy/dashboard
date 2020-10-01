@@ -11,23 +11,19 @@ import Register from '../register';
 import NotFound from './not-found';
 import PrivateRoute from './private-route';
 import AuthorizationRoute from './authorization-route';
+import Platform from '../platform';
 
 const Routes = () => {
   return (
     <Router>
       <Switch>
-        <PrivateRoute path="/dashboard">
-          <Dashboard />
-        </PrivateRoute>
+        <PrivateRoute path="/dashboard" component={Dashboard} />
+        <PrivateRoute exact path="/platform/:id" component={Platform}/>
         <Route exact path="/">
           <Redirect to="dashboard" />
         </Route>
-        <AuthorizationRoute path="/login">
-          <Login />
-        </AuthorizationRoute>
-        <AuthorizationRoute path="/signup">
-          <Register />
-        </AuthorizationRoute>
+        <AuthorizationRoute path="/login" component={Login} />
+        <AuthorizationRoute path="/signup" component={Register} />
         <Route path="*">
           <NotFound />
         </Route>

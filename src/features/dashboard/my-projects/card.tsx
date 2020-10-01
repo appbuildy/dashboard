@@ -1,20 +1,44 @@
 import React from 'react';
 import styled from 'styled-components';
-import createAppIcon from './create-app-icon.svg';
-import createAppPlaceholder from './create-app-placeholder.svg';
+import {
+  CreateAppIcon,
+  AppIconTemplate,
+  CreateAppPlaceholder1Svg,
+} from '../../../assets/dashboard/index';
 
 interface CardProps {
-    onClick: () => void ;
+  onClick: () => void;
+  name?: string,
+  id?: number,
+  photo?: string,
+  updatedAt?: string,
 }
 
-const Card: React.FC<CardProps> = ({ onClick }) => {
+const Card: React.FC<CardProps> = ({
+  onClick,
+  name,
+  id,
+  photo,
+  updatedAt,
+  }) => {
+
+  const isProjectCreateButton = !id;
+
   return (
     <Wrapper onClick={onClick}>
       <Preview>
-        <PlaceholderIcon src={createAppPlaceholder} />
+        <Image src={photo ? photo : CreateAppPlaceholder1Svg}  />
       </Preview>
       <Info>
-        <InfoIcon src={createAppIcon} /> Create App
+        <InfoIcon src={isProjectCreateButton ? CreateAppIcon : AppIconTemplate} />
+        <CardDescription>
+          <CardName title={name}>
+            {name}
+          </CardName>
+          <CardTime>
+            {updatedAt}
+          </CardTime>
+        </CardDescription>
       </Info>
     </Wrapper>
   );
@@ -22,7 +46,27 @@ const Card: React.FC<CardProps> = ({ onClick }) => {
 
 export default Card;
 
-const PlaceholderIcon = styled.img``;
+const Image = styled.img`
+  width: 100%;
+  object-fit: cover;
+`;
+
+const CardDescription = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const CardName = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 180px;
+`;
+
+const CardTime = styled.div`
+  color: #777777;
+`;
 
 const InfoIcon = styled.img`
   width: 36px;
@@ -44,6 +88,7 @@ const Info = styled.div`
 
 const Wrapper = styled.div`
   height: 280px;
+  width: 272px;
   flex-basis: 270px;
   border-radius: 8px;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);

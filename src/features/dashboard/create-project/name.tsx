@@ -1,6 +1,6 @@
 import React from 'react';
 import { Input, Button } from '../../../ui';
-import { CreateAppShapeSvg } from '../../../assets/dashboard';
+import { CreateAppPlaceholder2Svg } from '../../../assets/dashboard';
 import styled from 'styled-components';
 
 import {
@@ -50,7 +50,7 @@ const Name = (props: IName) => {
         <Button onClick={onSubmit}>Continue</Button>
       </StyledActiveZone>
       <StyledInfoZone>
-        <img src={CreateAppShapeSvg} alt="shape" />
+        <img src={CreateAppPlaceholder2Svg} alt="shape" />
       </StyledInfoZone>
     </Wrapper>
   );

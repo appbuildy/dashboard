@@ -176,7 +176,10 @@ const CreateProject = () => {
         </CloseButton>
       </Modal>
 
-      <Card onClick={() => setIsOpen(true)}> create</Card>
+      <Card
+        onClick={() => setIsOpen(true)}
+        name="Create App"
+      />
     </>
   );
 };
