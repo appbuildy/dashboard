@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { createProject } from './actions';
-import Card from '../my-projects/card';
+import CreateProjectCard from '../my-projects/create-project-card';
 import './modal.css';
 import { CloseSvg } from '../../../assets/dashboard';
 
@@ -176,10 +176,7 @@ const CreateProject = () => {
         </CloseButton>
       </Modal>
 
-      <Card
-        onClick={() => setIsOpen(true)}
-        name="Create App"
-      />
+      <CreateProjectCard onClick={() => setIsOpen(true)} />
     </>
   );
 };

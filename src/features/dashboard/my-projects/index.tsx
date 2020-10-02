@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import CreateProject from '../create-project';
-import Card from '../my-projects/card';
+import ProjectCard from './project-card';
 import { getProjects, IProject } from '../actions';
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
@@ -24,9 +24,8 @@ const MyProjects = () => {
     <Container>
       <CreateProject />
       {projects.map((project: IProject) => (
-        <Card
+        <ProjectCard
           key={project.id}
-          id={project.id}
           name={project.name}
           photo={project.photo}
           updatedAt={timeAgo.format(new Date(project.updated_at))}
