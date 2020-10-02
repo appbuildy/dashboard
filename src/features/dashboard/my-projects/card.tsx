@@ -27,7 +27,7 @@ const Card: React.FC<CardProps> = ({
   return (
     <Wrapper onClick={onClick}>
       <Preview>
-        <Image src={photo ? photo : CreateAppPlaceholder1Svg}  />
+        <Image hasPadding={isProjectCreateButton} src={photo ? photo : CreateAppPlaceholder1Svg}  />
       </Preview>
       <Info>
         <InfoIcon src={isProjectCreateButton ? CreateAppIcon : AppIconTemplate} />
@@ -46,9 +46,10 @@ const Card: React.FC<CardProps> = ({
 
 export default Card;
 
-const Image = styled.img`
+const Image = styled.img<{ hasPadding: boolean }>`
   width: 100%;
   object-fit: cover;
+  ${({ hasPadding }) => hasPadding && `padding: 16px 0 16px 16px`};
 `;
 
 const CardDescription = styled.div`
@@ -87,6 +88,7 @@ const Info = styled.div`
 `;
 
 const Wrapper = styled.div`
+  overflow: hidden;
   height: 280px;
   width: 272px;
   flex-basis: 270px;

@@ -8,37 +8,8 @@ import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
 TimeAgo.addLocale(en)
 
-const things = [
-  {
-    name: 'KekLolOrbidol',
-    id: 228,
-    photo: "https://previews.123rf.com/images/fotojagodka/fotojagodka2006/fotojagodka200600028/150450124-happy-cat-breed-scottish-fold-over-a-white-banner.jpg",
-    updated_at: "2020-10-01T05:03:27.745Z",
-  },{
-    name: 'pekmemememememekekekmeekemekekekeemke',
-    id: 322,
-    photo: "https://previews.123rf.com/images/fotojagodka/fotojagodka2006/fotojagodka200600028/150450124-happy-cat-breed-scottish-fold-over-a-white-banner.jpg",
-    updated_at: "2020-10-01T05:03:27.745Z",
-  },{
-    name: 'Grek with olek',
-    id: 7514,
-    photo: "https://previews.123rf.com/images/fotojagodka/fotojagodka2006/fotojagodka200600028/150450124-happy-cat-breed-scottish-fold-over-a-white-banner.jpg",
-    updated_at: "2020-10-01T05:03:27.745Z",
-  },{
-    name: 'Hum',
-    id: 241412,
-    photo: "https://previews.123rf.com/images/fotojagodka/fotojagodka2006/fotojagodka200600028/150450124-happy-cat-breed-scottish-fold-over-a-white-banner.jpg",
-    updated_at: "2020-10-01T05:03:27.745Z",
-  },{
-    name: 'Witch is Bitch',
-    id: 51512,
-    photo: "https://previews.123rf.com/images/fotojagodka/fotojagodka2006/fotojagodka200600028/150450124-happy-cat-breed-scottish-fold-over-a-white-banner.jpg",
-    updated_at: "2020-10-01T05:03:27.745Z",
-  },
-]
-
 const MyProjects = () => {
-  const [/*projects*/, setProjects] = useState<IProject[]>([]);
+  const [projects, setProjects] = useState<IProject[]>([]);
 
   useEffect(() => {
     getProjects()
@@ -52,7 +23,7 @@ const MyProjects = () => {
   return (
     <Container>
       <CreateProject />
-      {things.map((project: IProject) => (
+      {projects.map((project: IProject) => (
         <Card
           key={project.id}
           id={project.id}
