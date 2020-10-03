@@ -1,20 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import CreateProject from '../create-project';
 import ProjectCard from './project-card';
-import { getProjects, IProject } from '../actions';
+import * as dashboardActions from '../../../dashboard/actions';
+import { connect } from 'react-redux';
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
+import { IProject } from '../../../dashboard/interfaces';
+
 TimeAgo.addLocale(en)
 
-const MyProjects = () => {
-  const [projects, setProjects] = useState<IProject[]>([]);
+interface IMyProjects {
+  getProjects: () => void;
+  projects: IProject[];
+}
+
+const MyProjects = (props: IMyProjects) => {
+  const { getProjects, projects } = props;
 
   useEffect(() => {
-    getProjects()
-      .then((projects: IProject[]) => setProjects(projects));
-  }, []);
+    getProjects();
+  }, [getProjects]);
 
   const history = useHistory();
 
@@ -36,7 +43,16 @@ const MyProjects = () => {
   );
 };
 
-export default MyProjects;
+const mapStateToProps = (state: any) => ({
+  projects: state.dashboard.projects,
+  state: state,
+});
+
+const mapDispatchToProps = {
+  getProjects: dashboardActions.getProjects,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyProjects);
 
 const Container = styled.div`
   margin: auto;

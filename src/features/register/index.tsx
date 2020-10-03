@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { Input, PasswordInput, Button, Error } from '../../ui';
 import { useHistory, Link } from 'react-router-dom';
 import { emailRegEx } from '../lib/emailRegEx';
-import { register, IRegisterResponse } from './actions';
+import * as applicationActions from '../../application/actions';
+import { connect } from 'react-redux';
 import {
   bgSvg,
   logoSvg,
@@ -11,7 +12,15 @@ import {
   googleSvg,
 } from '../../assets/authorization';
 
-const Register = () => {
+import { IUser } from '../../application/interfaces';
+
+interface IRegister {
+  register: (user: IUser) => Promise<any>;
+}
+
+const Register = (props: IRegister) => {
+  const { register } = props;
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [secondPassword, setSecondPassword] = useState('');
@@ -48,10 +57,7 @@ const Register = () => {
       };
 
       register(user)
-        .then((response: IRegisterResponse) => {
-          localStorage.setItem('jwt', response.jwt);
-          history.push('/dashboard');
-        })
+        .then(() => history.push('/dashboard'))
         .catch(() => {
           setError('This email already exist');
         });
@@ -136,7 +142,11 @@ const Register = () => {
   );
 };
 
-export default Register;
+const mapDispatchToProps = {
+  register: applicationActions.register,
+}
+
+export default connect(null, mapDispatchToProps)(Register);
 
 const Wrapper = styled.div`
   background-image: url('${bgSvg}');

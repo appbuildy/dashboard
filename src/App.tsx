@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import Routes from './features/routes';
 import { initializeAxios } from './features/lib/axios';
+import { connect } from 'react-redux';
+import * as applicationActions from './application/actions';
 
-function App() {
+interface IApp {
+  me: () => void,
+}
+
+function App(props: IApp) {
+  const { me } = props;
+
   initializeAxios();
+
+  useEffect(() => {
+    me();
+  }, [me]);
+
   return (
     <div className="App">
       <Helmet>
@@ -20,4 +33,8 @@ function App() {
   );
 }
 
-export default App;
+const mapDispatchToProps = {
+  me: applicationActions.me,
+}
+
+export default connect(null, mapDispatchToProps)(App);

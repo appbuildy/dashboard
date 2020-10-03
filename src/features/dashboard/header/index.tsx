@@ -3,11 +3,19 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { Layout } from 'antd';
 import logo from './logo.svg';
+import { connect } from 'react-redux';
 
 const { Header: AntHeader } = Layout;
 
-const Header = () => {
+interface IHeader {
+  email: string,
+}
+
+const Header = (props: IHeader) => {
+  const { email } = props;
+
   const history = useHistory();
+
   return (
     <AntHeader style={{ background: '#fff' }}>
       <Container>
@@ -20,7 +28,7 @@ const Header = () => {
             <Item>Help</Item>
           </ItemList>
         </LogoContainer>
-        <LoginInfo>sergey@appbuildy.com</LoginInfo>
+        <LoginInfo>{email}</LoginInfo>
         {/*заглушка*/}
         <ExitButton
           onClick={() => {
@@ -35,7 +43,11 @@ const Header = () => {
   );
 };
 
-export default Header;
+const mapStateToProps = (state: any) => ({
+  email: state.application.user.email,
+});
+
+export default connect(mapStateToProps)(Header);
 
 // заглушка
 const ExitButton = styled.div`

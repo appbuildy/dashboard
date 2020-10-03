@@ -2,9 +2,9 @@ import axios from 'axios';
 
 export const initializeAxios = () => {
   axios.defaults.baseURL = 'https://www.appbuildy.com';
-  axios.defaults.headers.post['Content-Type'] =
-    'application/json;charset=utf-8';
-  axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+  // axios.defaults.headers.post['Content-Type'] =
+  //   'application/json;charset=utf-8';
+  // axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 };
 
 axios.interceptors.request.use((config: any) => {
@@ -18,7 +18,8 @@ axios.interceptors.request.use((config: any) => {
 axios.interceptors.response.use(
   (e) => e,
   (error: any) => {
-    if (error.response.status === 401) {
+    console.log(error)
+    if (error.response && error.response.status === 401) {
       localStorage.removeItem('jwt');
     }
     return Promise.reject(error);

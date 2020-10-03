@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { Input, PasswordInput, Button, Error } from '../../ui';
 import { Link, useHistory } from 'react-router-dom';
 import { emailRegEx } from '../lib/emailRegEx';
-import { login, ILoginResponse } from './actions';
+import { connect } from 'react-redux';
+import * as applicationActions from '../../application/actions';
 import {
   bgSvg,
   logoSvg,
@@ -11,7 +12,15 @@ import {
   googleSvg,
 } from '../../assets/authorization';
 
-const Login = () => {
+import { IUser } from '../../application/interfaces';
+
+interface ILogin {
+  login: (user: IUser) => Promise<any>;
+}
+
+const Login = (props: ILogin) => {
+  const { login } = props;
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -44,10 +53,7 @@ const Login = () => {
       };
 
       login(user)
-        .then((response: ILoginResponse) => {
-          localStorage.setItem('jwt', response.jwt);
-          history.push('/dashboard');
-        })
+        .then(() => history.push('/dashboard'))
         .catch(() => {
           setError('Wrong e-mail or password');
         });
@@ -126,7 +132,11 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapDispatchToProps = {
+  login: applicationActions.login,
+};
+
+export default connect(null, mapDispatchToProps)(Login);
 
 const Wrapper = styled.div`
   background-image: url('${bgSvg}');
