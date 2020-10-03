@@ -27,6 +27,7 @@ export const register = (user: IUser) => (dispatch: Dispatch): Promise<any> => (
       .register(user)
       .then((response: IUserResponse) => {
         const { jwt, ...rest } = response;
+
         localStorage.setItem('jwt', jwt);
         dispatch(setUser(rest));
 

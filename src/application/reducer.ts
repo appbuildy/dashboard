@@ -10,7 +10,6 @@ const initialState = {
     encrypted_password: null,
     fb_id: 0,
     id: 0,
-    jwt: null,
     last_name: null,
     remember_created_at: null,
     reset_password_sent_at: null,
