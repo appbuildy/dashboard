@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { Input, PasswordInput, Button, Error } from '../../ui';
 import { useHistory, Link } from 'react-router-dom';
 import { emailRegEx } from '../lib/emailRegEx';
-import * as applicationActions from '../../application/actions';
-import { connect } from 'react-redux';
+import { register } from '../../application/actions';
+import { useDispatch } from 'react-redux';
 import {
   bgSvg,
   logoSvg,
@@ -12,21 +12,15 @@ import {
   googleSvg,
 } from '../../assets/authorization';
 
-import { IUser } from '../../application/interfaces';
-
-interface IRegister {
-  register: (user: IUser) => Promise<any>;
-}
-
-const Register = (props: IRegister) => {
-  const { register } = props;
+const Register = () => {
+  const history = useHistory();
+  const dispatch: any = useDispatch();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [secondPassword, setSecondPassword] = useState('');
-  const [error, setError] = useState('');
 
-  const history = useHistory();
+  const [error, setError] = useState('');
 
   const handleGoogle = () => {
     alert('google');
@@ -56,7 +50,7 @@ const Register = (props: IRegister) => {
         password: password,
       };
 
-      register(user)
+      dispatch(register(user))
         .then(() => history.push('/dashboard'))
         .catch(() => {
           setError('This email already exist');
@@ -142,11 +136,7 @@ const Register = (props: IRegister) => {
   );
 };
 
-const mapDispatchToProps = {
-  register: applicationActions.register,
-}
-
-export default connect(null, mapDispatchToProps)(Register);
+export default Register;
 
 const Wrapper = styled.div`
   background-image: url('${bgSvg}');

@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { Input, PasswordInput, Button, Error } from '../../ui';
 import { Link, useHistory } from 'react-router-dom';
 import { emailRegEx } from '../lib/emailRegEx';
-import { connect } from 'react-redux';
-import * as applicationActions from '../../application/actions';
+import { useDispatch } from 'react-redux';
+import { login } from '../../application/actions';
 import {
   bgSvg,
   logoSvg,
@@ -12,20 +12,15 @@ import {
   googleSvg,
 } from '../../assets/authorization';
 
-import { IUser } from '../../application/interfaces';
+const Login = () => {
 
-interface ILogin {
-  login: (user: IUser) => Promise<any>;
-}
-
-const Login = (props: ILogin) => {
-  const { login } = props;
+  const history = useHistory();
+  const dispatch: any = useDispatch();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
 
-  const history = useHistory();
+  const [error, setError] = useState('');
 
   const handleGoogle = () => {
     alert('google');
@@ -52,7 +47,7 @@ const Login = (props: ILogin) => {
         password: password,
       };
 
-      login(user)
+      dispatch(login(user))
         .then(() => history.push('/dashboard'))
         .catch(() => {
           setError('Wrong e-mail or password');
@@ -132,11 +127,7 @@ const Login = (props: ILogin) => {
   );
 };
 
-const mapDispatchToProps = {
-  login: applicationActions.login,
-};
-
-export default connect(null, mapDispatchToProps)(Login);
+export default Login;
 
 const Wrapper = styled.div`
   background-image: url('${bgSvg}');

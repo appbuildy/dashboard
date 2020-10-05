@@ -2,21 +2,18 @@ import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import Routes from './features/routes';
 import { initializeAxios } from './features/lib/axios';
-import { connect } from 'react-redux';
-import * as applicationActions from './application/actions';
+import { useDispatch } from 'react-redux';
+import { me } from './application/actions';
 
-interface IApp {
-  me: () => void,
-}
-
-function App(props: IApp) {
-  const { me } = props;
+function App() {
 
   initializeAxios();
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    me();
-  }, [me]);
+    dispatch(me());
+  }, [dispatch]);
 
   return (
     <div className="App">
@@ -33,8 +30,4 @@ function App(props: IApp) {
   );
 }
 
-const mapDispatchToProps = {
-  me: applicationActions.me,
-}
-
-export default connect(null, mapDispatchToProps)(App);
+export default App;
