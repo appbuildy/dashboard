@@ -4,13 +4,14 @@ import { useHistory } from 'react-router-dom';
 import { Layout } from 'antd';
 import logo from './logo.svg';
 import { useSelector } from 'react-redux';
+import { RootState } from '../../../store';
 
 const { Header: AntHeader } = Layout;
 
 const Header = () => {
   const history = useHistory();
 
-  const email = useSelector((state: any) => state.application.user.email)
+  const email = useSelector((state: RootState) => state.application.user.email)
 
   return (
     <AntHeader style={{ background: '#fff' }}>

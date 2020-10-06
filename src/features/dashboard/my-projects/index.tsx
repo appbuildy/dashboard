@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
 import { IProject } from '../../../dashboard/interfaces';
+import { RootState } from '../../../store';
 
 TimeAgo.addLocale(en)
 
@@ -19,7 +20,7 @@ const MyProjects = () => {
     dispatch(getProjects());
   }, [dispatch]);
 
-  const projects = useSelector((state: any) => state.dashboard.projects);
+  const projects = useSelector((state: RootState) => state.dashboard.projects);
 
   const history = useHistory();
 
