@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {
   CreateAppIcon,
   CreateAppPlaceholder1Svg,
-} from '../../../assets/dashboard/index';
+} from '../../../../assets/dashboard';
 
 import {
   CardDescription,

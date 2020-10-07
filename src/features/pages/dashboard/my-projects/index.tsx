@@ -3,22 +3,23 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import CreateProject from '../create-project';
 import ProjectCard from './project-card';
-import { getProjects } from '../../../dashboard/actions';
+import * as dashboardActions from '../../../../redux/dashboard/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
-import { IProject } from '../../../dashboard/interfaces';
-import { RootState } from '../../../store';
+import { IProject } from '../../../../redux/dashboard/interfaces';
+import { RootState } from '../../../../redux/store';
 
 TimeAgo.addLocale(en)
 
-const MyProjects = () => {
-
+const MyProjects: React.FC = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getProjects());
-  }, [dispatch]);
+  const getProjects = () => {
+    dispatch(dashboardActions.getProjects());
+  }
+
+  useEffect(getProjects, [dispatch]);
 
   const projects = useSelector((state: RootState) => state.dashboard.projects);
 
@@ -28,7 +29,7 @@ const MyProjects = () => {
 
   return (
     <Container>
-      <CreateProject />
+      <CreateProject onCreated={getProjects}/>
       {projects.map((project: IProject) => (
         <ProjectCard
           key={project.id}
@@ -48,6 +49,7 @@ const Container = styled.div`
   margin: auto;
   max-width: 1148px;
   display: grid;
+  justify-items: center;
   grid-gap: 20px;
   grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
 `;

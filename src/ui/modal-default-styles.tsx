@@ -1,40 +1,40 @@
 import styled from 'styled-components';
 
-export const Title = styled.div`
+export const ModalTitle = styled.div`
   font-size: 36px;
   margin-bottom: 5px;
 `;
 
-export const Error = styled.div`
+export const ModalError = styled.div`
   color: #f03838;
   font-weight: 400;
   margin-top: 10px;
 `;
 
-export const SubTitle = styled.div`
+export const ModalSubtitle = styled.div`
   font-size: 16px;
   font-weight: 400;
   margin-bottom: 15px;
 `;
 
-export const Secured = styled.div`
+export const ModalSecured = styled.div`
   margin-top: 15px;
   cursor: pointer;
   color: #007aff;
 `;
 
-export const Wrapper = styled.div`
+export const ModalWrapper = styled.div`
   display: flex;
 `;
 
-export const GifContainer = styled.img`
+export const ModalIllustration = styled.img`
   margin-top: 15px;
   margin-bottom: 20px;
   border-radius: 6px;
   width: 458px;
 `;
 
-export const ActiveZone = styled.div`
+export const ModalActiveZone = styled.div`
   width: 500px;
   display: flex;
   flex-direction: column;
@@ -47,7 +47,7 @@ export const ActiveZone = styled.div`
   background: #fff;
 `;
 
-export const InfoZone = styled.div`
+export const ModalInfoZone = styled.div`
   width: 500px;
   box-sizing: border-box;
   border-top-right-radius: 8px;

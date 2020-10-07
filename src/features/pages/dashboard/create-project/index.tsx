@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { createProject } from './actions';
 import CreateProjectCard from '../my-projects/create-project-card';
 import './modal.css';
-import { CloseSvg } from '../../../assets/dashboard';
+import ModalCloseButton from '../../../../ui/modal-close-button';
 
 import { Modal } from 'antd';
 import Token from './token';
@@ -14,32 +13,7 @@ const STEP_NAME = 'STEP_NAME';
 const STEP_TOKEN = 'STEP_TOKEN';
 const STEP_BASE = 'STEP_BASE';
 
-const CloseButton = styled.div`
-  top: -13px;
-  right: -13px;
-  position: absolute;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
-  background-color: #ffffff;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  img {
-    transition: all 0.2s ease-in-out;
-  }
-
-  :hover {
-    img {
-      opacity: 0.7;
-    }
-  }
-`;
-
-const CreateProject = () => {
+const CreateProject: React.FC<{ onCreated: () => void }> = ({ onCreated }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [step, setStep] = useState<string>(STEP_NAME);
 
@@ -108,6 +82,7 @@ const CreateProject = () => {
           createProject(newProject)
             .then(() => {
               setIsOpen(false);
+              onCreated();
             });
         }
 
@@ -171,9 +146,7 @@ const CreateProject = () => {
         width={step === STEP_NAME ? 800 : 1000}
       >
         {renderStep()}
-        <CloseButton onClick={closeModal}>
-          <img src={CloseSvg} alt="" />
-        </CloseButton>
+        <ModalCloseButton closeModal={closeModal}/>
       </Modal>
 
       <CreateProjectCard onClick={() => setIsOpen(true)} />
