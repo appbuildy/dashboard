@@ -1,16 +1,16 @@
 import React from 'react';
-import { Input, Button } from '../../../ui';
+import { Input, Button } from '../../../../ui';
 import baseGif from './base.gif';
 
 import {
-  Wrapper,
-  ActiveZone,
-  Title,
-  SubTitle,
-  InfoZone,
-  GifContainer,
-  Error,
-} from './styles';
+  ModalWrapper,
+  ModalActiveZone,
+  ModalTitle,
+  ModalSubtitle,
+  ModalInfoZone,
+  ModalIllustration,
+  ModalError,
+} from '../../../../ui/modal-default-styles';
 
 interface IBase {
   value: string;
@@ -28,14 +28,14 @@ const Base = (props: IBase) => {
   } = props;
 
   return (
-    <Wrapper>
-      <ActiveZone>
+    <ModalWrapper>
+      <ModalActiveZone>
         <div>
-          <Title>Share a Link to your Base</Title>
-          <SubTitle>
+          <ModalTitle>Share a Link to your Base</ModalTitle>
+          <ModalSubtitle>
             Choose the base that you use as a database for this app. <br />
             Paste a link to this base.
-          </SubTitle>
+          </ModalSubtitle>
           <div style={{ marginLeft: '-3px' }}>
             <Input
               value={value}
@@ -43,7 +43,7 @@ const Base = (props: IBase) => {
               placeholder="Paste the Link here"
             />
           </div>
-          <Error>{error}</Error>
+          <ModalError>{error}</ModalError>
           {/*<Secured onClick={() => setIsProtected(s => !s)}>*/}
           {/*  My shared base is password protected*/}
           {/*</Secured>*/}
@@ -56,21 +56,21 @@ const Base = (props: IBase) => {
           {/*)}*/}
         </div>
         <Button onClick={onSubmit}>Continue</Button>
-      </ActiveZone>
-      <InfoZone>
+      </ModalActiveZone>
+      <ModalInfoZone>
         <span>
           You'll find this in the Share menu, which you can access <br />
           from the top right-hand corner of your Airtable base.
         </span>
-        <GifContainer alt="token gif" src={baseGif} />
+        <ModalIllustration alt="token gif" src={baseGif} />
         <Button
           onClick={() => window.open('https://airtable.com')}
           type="border"
         >
           Open Airtable
         </Button>
-      </InfoZone>
-    </Wrapper>
+      </ModalInfoZone>
+    </ModalWrapper>
   );
 };
 

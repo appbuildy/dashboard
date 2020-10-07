@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import Routes from './features/routes';
 import { initializeAxios } from './features/lib/axios';
 import { useDispatch } from 'react-redux';
-import { me } from './application/actions';
+import { me } from './redux/application/actions';
 
 function App() {
 

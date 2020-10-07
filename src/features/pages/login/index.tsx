@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Input, PasswordInput, Button, Error } from '../../ui';
-import { useHistory, Link } from 'react-router-dom';
-import { emailRegEx } from '../lib/emailRegEx';
-import { register } from '../../application/actions';
+import { Input, PasswordInput, Button, Error } from '../../../ui';
+import { Link, useHistory } from 'react-router-dom';
+import { emailRegEx } from '../../lib/emailRegEx';
 import { useDispatch } from 'react-redux';
+import { login } from '../../../redux/application/actions';
 import {
   bgSvg,
   logoSvg,
   facebookSvg,
   googleSvg,
-} from '../../assets/authorization';
+} from '../../../assets/authorization';
 
-const Register = () => {
+const Login = () => {
+
   const history = useHistory();
   const dispatch: any = useDispatch();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [secondPassword, setSecondPassword] = useState('');
 
   const [error, setError] = useState('');
 
@@ -31,14 +31,11 @@ const Register = () => {
 
   const isValid = (): boolean => {
     const emailError = !emailRegEx.test(email) ? 'Incorrect e-mail format' : '';
-    const passwordError =
-      password.length < 6 ? 'Minimum password length is 6' : '';
-    const secondPasswordError =
-      password !== secondPassword ? 'Passwords must be the same' : '';
+    const passwordError = password.length < 6 ? 'Wrong e-mail or password' : '';
 
-    setError(emailError || passwordError || secondPasswordError || '');
+    setError(emailError || passwordError || '');
 
-    return !emailError && !passwordError && !secondPasswordError;
+    return !emailError && !passwordError;
   };
 
   const handleCredentials = () => {
@@ -50,10 +47,10 @@ const Register = () => {
         password: password,
       };
 
-      dispatch(register(user))
+      dispatch(login(user))
         .then(() => history.push('/dashboard'))
         .catch(() => {
-          setError('This email already exist');
+          setError('Wrong e-mail or password');
         });
     }
   };
@@ -62,8 +59,8 @@ const Register = () => {
     <Wrapper>
       <Container>
         <Logo src={logoSvg} />
-        <Form onSubmit={handleCredentials}>
-          <Title>Sign Up</Title>
+        <Form>
+          <Title>Log In</Title>
           <ButtonContainer>
             <Button size="big" type="light" onClick={handleGoogle}>
               <ButtonAlign>
@@ -111,23 +108,17 @@ const Register = () => {
               size="big"
               placeholder="Password"
             />
-            <SizedBox />
-            <PasswordInput
-              value={secondPassword}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setSecondPassword(e.target.value)
-              }
-              size="big"
-              placeholder="Password Again"
-            />
             <BigSizedBox />
             <Button onClick={handleCredentials} size={'big'}>
               Continue
             </Button>
           </Inputs>
           <Actions>
-            <Link to="/login">
-              <ActionText>Already have an account?</ActionText>
+            <Link to="/signup">
+              <ActionText>Don’t have an account?</ActionText>
+            </Link>
+            <Link to="">
+              <ActionText>Forgot Password?</ActionText>
             </Link>
           </Actions>
         </Form>
@@ -136,7 +127,7 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
 
 const Wrapper = styled.div`
   background-image: url('${bgSvg}');
@@ -186,7 +177,7 @@ const CenterHelper = styled.div`
   flex: 1;
 `;
 
-const Form = styled.form`
+const Form = styled.div`
   padding: 40px 60px;
   border-radius: 25px;
   box-shadow: 0 10px 60px rgba(0, 0, 0, 0.1);
@@ -212,7 +203,7 @@ const Inputs = styled.div``;
 const Actions = styled.div`
   margin-top: 32px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 `;
 
 const ActionText = styled.div`

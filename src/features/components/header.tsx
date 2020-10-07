@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { Layout } from 'antd';
-import logo from './logo.svg';
+import logo from '../../assets/header/logo.svg';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../store';
+import { RootState } from '../../redux/store';
 
 const { Header: AntHeader } = Layout;
 
@@ -19,10 +20,10 @@ const Header = () => {
         <LogoContainer>
           <Logo src={logo} />
           <ItemList>
-            <Item isActive>Apps</Item>
-            <Item>Templates</Item>
-            <Item>Billing</Item>
-            <Item>Help</Item>
+            <NavLinkItem to="/dashboard">Apps</NavLinkItem>
+            <NavLinkItem to="/templates">Templates</NavLinkItem>
+            <NavLinkItem to="/billing">Billing</NavLinkItem>
+            <NavLinkItem to="/help">Help</NavLinkItem>
           </ItemList>
         </LogoContainer>
         <LoginInfo>{email}</LoginInfo>
@@ -61,6 +62,8 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  max-width: 1148px;
+  margin: auto;
 `;
 
 const LogoContainer = styled.div`
@@ -78,8 +81,19 @@ const ItemList = styled.div`
   display: flex;
 `;
 
-const Item = styled.div<{isActive?: boolean}>`
-  margin-right: 20px;
-  cursor: pointer;
-  color: ${p => (p.isActive ? '#007aff' : '#000')};
+const NavLinkItem = styled(NavLink)`
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 8px 13px;
+  height: 36px;
+  color: #000;
+  border-radius: 7px;
+  transition: all 0.2s ease-in-out;
+  
+  &.active {
+    color: #007aff;
+    background-image: linear-gradient(to bottom, rgba(97, 228, 255, 0.3), rgba(0, 160, 255, 0.35));
+  }
 `;

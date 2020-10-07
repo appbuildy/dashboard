@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { AppIconTemplate,  CreateAppPlaceholder1Svg } from '../../../assets/dashboard/index';
+import { AppIconTemplate,  CreateAppPlaceholder1Svg } from '../../../../assets/dashboard';
 
 import {
   CardDescription,

@@ -5,13 +5,16 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
-import Dashboard from '../dashboard';
-import Login from '../login';
-import Register from '../register';
+import Dashboard from '../pages/dashboard';
+import Login from '../pages/login';
+import Register from '../pages/register';
 import NotFound from './not-found';
 import PrivateRoute from './private-route';
 import AuthorizationRoute from './authorization-route';
-import Platform from '../platform';
+import Platform from '../pages/platform';
+import Templates from '../pages/templates';
+import Billing from '../pages/billing';
+import Help from '../pages/help';
 
 const Routes = () => {
   return (
@@ -19,6 +22,9 @@ const Routes = () => {
       <Switch>
         <PrivateRoute path="/dashboard" component={Dashboard} />
         <PrivateRoute exact path="/platform/:id" component={Platform}/>
+        <PrivateRoute exact path="/templates" component={Templates}/>
+        <PrivateRoute exact path="/billing" component={Billing}/>
+        <PrivateRoute exact path="/help" component={Help}/>
         <Route exact path="/">
           <Redirect to="dashboard" />
         </Route>

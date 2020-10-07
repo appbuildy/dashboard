@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import 'antd/dist/antd.css';
 import Iframe from 'react-iframe';
+import InvalidBrowserModal from '../../components/invalid-broswer/invalid-browser-modal';
+import { isInvalidBrowser } from '../../lib/isInvalidBrowser';
 
 // interface IPlatform {
 //   match: {
@@ -13,11 +15,17 @@ import Iframe from 'react-iframe';
 
 const Platform = (/*props: IPlatform*/) => {
   // const { id } = props.match.params;
+  // const isInvalidBrowser = true //navigator.userAgent.indexOf("Chrome") === -1;
 
   return (
-    <IframeStyled
-      url="https://www.appbuildy.com/web/index.html"
-    />
+    <>
+      <IframeStyled
+        url="https://www.appbuildy.com/web/index.html"
+      />
+      {isInvalidBrowser && (
+        <InvalidBrowserModal />
+      )}
+    </>
   );
 };
 

@@ -1,26 +1,26 @@
 import React from 'react';
-import { Input, Button } from '../../../ui';
-import { CreateAppPlaceholder2Svg } from '../../../assets/dashboard';
+import { Input, Button } from '../../../../ui';
+import { CreateAppPlaceholder2Svg } from '../../../../assets/dashboard';
 import styled from 'styled-components';
 
 import {
-  Wrapper,
-  ActiveZone,
-  Title,
-  SubTitle,
-  InfoZone,
-} from './styles';
+  ModalWrapper,
+  ModalActiveZone,
+  ModalTitle,
+  ModalSubtitle,
+  ModalInfoZone,
+} from '../../../../ui/modal-default-styles';
 
-const StyledActiveZone = styled(ActiveZone)`
+const StyledActiveZone = styled(ModalActiveZone)`
   padding: 30px 40px;
 `;
 
-const StyledInfoZone = styled(InfoZone)`
+const StyledInfoZone = styled(ModalInfoZone)`
   max-width: 350px;
   padding: 50px 0 50px 50px;
 `;
 
-const StyledSubtitle = styled(SubTitle)`
+const StyledSubtitle = styled(ModalSubtitle)`
   margin-bottom: 40px;
 `;
 
@@ -34,10 +34,10 @@ const Name = (props: IName) => {
   const { onChange, value, onSubmit } = props;
 
   return (
-    <Wrapper>
+    <ModalWrapper>
       <StyledActiveZone>
         <div>
-          <Title>Create App</Title>
+          <ModalTitle>Create App</ModalTitle>
           <StyledSubtitle>
             No worries, you can name or change it later in case it’s still under question.
           </StyledSubtitle>
@@ -52,7 +52,7 @@ const Name = (props: IName) => {
       <StyledInfoZone>
         <img src={CreateAppPlaceholder2Svg} alt="shape" />
       </StyledInfoZone>
-    </Wrapper>
+    </ModalWrapper>
   );
 };
 

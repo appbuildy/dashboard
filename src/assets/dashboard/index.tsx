@@ -3,6 +3,7 @@ import CreateAppPlaceholder2Svg from './create-app-placeholder_2.svg';
 import CloseSvg from './action-close.svg';
 import CreateAppIcon from './create-app-icon.svg';
 import AppIconTemplate from './app-icon-template.svg';
+import ChromeSvg from './chrome.svg';
 
 export {
   CreateAppPlaceholder1Svg,
@@ -10,4 +11,5 @@ export {
   CloseSvg,
   CreateAppIcon,
   AppIconTemplate,
+  ChromeSvg,
 }
