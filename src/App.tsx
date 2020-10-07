@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import Routes from './features/routes';
 import { initializeAxios } from './features/lib/axios';
+import { useDispatch } from 'react-redux';
+import { me } from './application/actions';
 
 function App() {
+
   initializeAxios();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(me());
+  }, [dispatch]);
+
   return (
     <div className="App">
       <Helmet>

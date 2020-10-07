@@ -1,20 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import CreateProject from '../create-project';
 import ProjectCard from './project-card';
-import { getProjects, IProject } from '../actions';
+import { getProjects } from '../../../dashboard/actions';
+import { useDispatch, useSelector } from 'react-redux';
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
+import { IProject } from '../../../dashboard/interfaces';
+import { RootState } from '../../../store';
+
 TimeAgo.addLocale(en)
 
 const MyProjects = () => {
-  const [projects, setProjects] = useState<IProject[]>([]);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getProjects()
-      .then((projects: IProject[]) => setProjects(projects));
-  }, []);
+    dispatch(getProjects());
+  }, [dispatch]);
+
+  const projects = useSelector((state: RootState) => state.dashboard.projects);
 
   const history = useHistory();
 

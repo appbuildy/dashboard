@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { Input, PasswordInput, Button, Error } from '../../ui';
 import { Link, useHistory } from 'react-router-dom';
 import { emailRegEx } from '../lib/emailRegEx';
-import { login, ILoginResponse } from './actions';
+import { useDispatch } from 'react-redux';
+import { login } from '../../application/actions';
 import {
   bgSvg,
   logoSvg,
@@ -12,11 +13,14 @@ import {
 } from '../../assets/authorization';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
 
   const history = useHistory();
+  const dispatch: any = useDispatch();
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const [error, setError] = useState('');
 
   const handleGoogle = () => {
     alert('google');
@@ -43,11 +47,8 @@ const Login = () => {
         password: password,
       };
 
-      login(user)
-        .then((response: ILoginResponse) => {
-          localStorage.setItem('jwt', response.jwt);
-          history.push('/dashboard');
-        })
+      dispatch(login(user))
+        .then(() => history.push('/dashboard'))
         .catch(() => {
           setError('Wrong e-mail or password');
         });

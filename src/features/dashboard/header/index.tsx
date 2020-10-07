@@ -3,11 +3,16 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { Layout } from 'antd';
 import logo from './logo.svg';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store';
 
 const { Header: AntHeader } = Layout;
 
 const Header = () => {
   const history = useHistory();
+
+  const email = useSelector((state: RootState) => state.application.user.email)
+
   return (
     <AntHeader style={{ background: '#fff' }}>
       <Container>
@@ -20,7 +25,7 @@ const Header = () => {
             <Item>Help</Item>
           </ItemList>
         </LogoContainer>
-        <LoginInfo>sergey@appbuildy.com</LoginInfo>
+        <LoginInfo>{email}</LoginInfo>
         {/*заглушка*/}
         <ExitButton
           onClick={() => {

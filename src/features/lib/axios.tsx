@@ -18,7 +18,8 @@ axios.interceptors.request.use((config: any) => {
 axios.interceptors.response.use(
   (e) => e,
   (error: any) => {
-    if (error.response.status === 401) {
+    console.log(error)
+    if (error.response && error.response.status === 401) {
       localStorage.removeItem('jwt');
     }
     return Promise.reject(error);

@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { Input, PasswordInput, Button, Error } from '../../ui';
 import { useHistory, Link } from 'react-router-dom';
 import { emailRegEx } from '../lib/emailRegEx';
-import { register, IRegisterResponse } from './actions';
+import { register } from '../../application/actions';
+import { useDispatch } from 'react-redux';
 import {
   bgSvg,
   logoSvg,
@@ -12,12 +13,14 @@ import {
 } from '../../assets/authorization';
 
 const Register = () => {
+  const history = useHistory();
+  const dispatch: any = useDispatch();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [secondPassword, setSecondPassword] = useState('');
-  const [error, setError] = useState('');
 
-  const history = useHistory();
+  const [error, setError] = useState('');
 
   const handleGoogle = () => {
     alert('google');
@@ -47,11 +50,8 @@ const Register = () => {
         password: password,
       };
 
-      register(user)
-        .then((response: IRegisterResponse) => {
-          localStorage.setItem('jwt', response.jwt);
-          history.push('/dashboard');
-        })
+      dispatch(register(user))
+        .then(() => history.push('/dashboard'))
         .catch(() => {
           setError('This email already exist');
         });
