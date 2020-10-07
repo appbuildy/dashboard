@@ -97,9 +97,3 @@ const NavLinkItem = styled(NavLink)`
     background-image: linear-gradient(to bottom, rgba(97, 228, 255, 0.3), rgba(0, 160, 255, 0.35));
   }
 `;
-
-// const Item = styled.div<{isActive?: boolean}>`
-//   margin-right: 20px;
-//   cursor: pointer;
-//   color: ${p => (p.isActive ? '#007aff' : '#000')};
-// `;
