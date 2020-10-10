@@ -5,22 +5,22 @@ import Iframe from 'react-iframe';
 import InvalidBrowserModal from '../../components/invalid-broswer/invalid-browser-modal';
 import { isInvalidBrowser } from '../../lib/isInvalidBrowser';
 
-// interface IPlatform {
-//   match: {
-//     params: {
-//       id: string;
-//     }
-//   }
-// }
+interface IPlatform {
+  match: {
+    params: {
+      id: string;
+    }
+  }
+}
 
-const Platform = (/*props: IPlatform*/) => {
-  // const { id } = props.match.params;
-  // const isInvalidBrowser = true //navigator.userAgent.indexOf("Chrome") === -1;
+const Platform: React.FC<IPlatform> = ({ match: { params} }) => {
+  const { id } = params;
+  const jwt = localStorage.getItem('jwt');
 
   return (
     <>
       <IframeStyled
-        url="https://www.appbuildy.com/web/index.html"
+        url={`https://www.appbuildy.com/projects/${id}/?project_id=${id}&jwt=${jwt}`}
       />
       {isInvalidBrowser && (
         <InvalidBrowserModal />
