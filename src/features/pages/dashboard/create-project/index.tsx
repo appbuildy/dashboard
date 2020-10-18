@@ -13,7 +13,7 @@ const STEP_NAME = 'STEP_NAME';
 const STEP_TOKEN = 'STEP_TOKEN';
 const STEP_BASE = 'STEP_BASE';
 
-const CreateProject: React.FC<{ onCreated: () => void }> = ({ onCreated }) => {
+const CreateProject: React.FC<{ onCreated: (projectId: number) => void }> = ({ onCreated }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [step, setStep] = useState<string>(STEP_NAME);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -83,10 +83,10 @@ const CreateProject: React.FC<{ onCreated: () => void }> = ({ onCreated }) => {
           setIsLoading(true);
 
           createProject(newProject)
-            .then(() => {
+            .then((project) => {
               setIsLoading(false);
               setIsOpen(false);
-              onCreated();
+              onCreated(project.id);
             });
         }
 
