@@ -137,7 +137,7 @@ const CreateProject: React.FC<{ onCreated: () => void }> = ({ onCreated }) => {
     <>
       <Modal
         visible={isOpen}
-        bodyStyle={{ padding: 0 }}
+        bodyStyle={{ padding: 0, minHeight: 400 }}
         onOk={closeModal}
         onCancel={closeModal}
         title={null}
