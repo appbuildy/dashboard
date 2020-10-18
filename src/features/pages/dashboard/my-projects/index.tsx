@@ -35,6 +35,7 @@ const MyProjects: React.FC = () => {
           key={project.id}
           name={project.name}
           photo={project.photo}
+          gradient={project.gradient}
           updatedAt={timeAgo.format(new Date(project.updated_at))}
           onClick={() => history.push(`/platform/${project.id}`)}
         />

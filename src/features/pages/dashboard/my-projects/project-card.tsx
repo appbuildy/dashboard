@@ -20,22 +20,26 @@ interface CardProps {
   onClick: () => void;
   name: string,
   photo?: string,
+  gradient?: string,
   updatedAt: string,
 }
 
 const Image = styled(PaddingImage)`
   padding: 0;
+  width: 112px;
+  height: 112px;
 `;
 
 const CreateProjectCard: React.FC<CardProps> = ({
   onClick,
   name,
   photo,
+  gradient,
   updatedAt,
   }) => {
   return (
     <Wrapper onClick={onClick}>
-      <Preview>
+      <Preview gradient={gradient}>
         {photo
           ? <Image src={photo} />
           : <PaddingImage src={CreateAppPlaceholder1Svg} />

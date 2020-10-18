@@ -94,15 +94,12 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const Preview = styled.div`
+export const Preview = styled.div<{gradient?: string}>`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
   height: 212px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  background-image: linear-gradient(
-    to bottom,
-    rgba(97, 228, 255, 0.3),
-    rgba(0, 160, 255, 0.35)
-  );
+  background-image: ${ p => p.gradient || 'linear-gradient(to bottom, rgba(97, 228, 255, 0.3), rgba(0, 160, 255, 0.35))'};
 `;
