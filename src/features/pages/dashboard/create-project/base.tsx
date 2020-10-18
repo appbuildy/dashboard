@@ -15,6 +15,7 @@ import {
 interface IBase {
   value: string;
   error: string;
+  isLoading: boolean;
   onChange: (value: string) => void;
   onSubmit: () => void;
 }
@@ -23,6 +24,7 @@ const Base = (props: IBase) => {
   const {
     value,
     error,
+    isLoading,
     onChange,
     onSubmit,
   } = props;
@@ -55,7 +57,7 @@ const Base = (props: IBase) => {
           {/*  />*/}
           {/*)}*/}
         </div>
-        <Button onClick={onSubmit}>Continue</Button>
+        <Button onClick={onSubmit} loading={isLoading}>Continue</Button>
       </ModalActiveZone>
       <ModalInfoZone>
         <span>

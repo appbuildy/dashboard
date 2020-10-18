@@ -16,6 +16,7 @@ const STEP_BASE = 'STEP_BASE';
 const CreateProject: React.FC<{ onCreated: () => void }> = ({ onCreated }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [step, setStep] = useState<string>(STEP_NAME);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [appName, setAppName] = useState<string>('');
 
@@ -79,8 +80,11 @@ const CreateProject: React.FC<{ onCreated: () => void }> = ({ onCreated }) => {
             },
           };
 
+          setIsLoading(true);
+
           createProject(newProject)
             .then(() => {
+              setIsLoading(false);
               setIsOpen(false);
               onCreated();
             });
@@ -115,6 +119,7 @@ const CreateProject: React.FC<{ onCreated: () => void }> = ({ onCreated }) => {
           <Base
             value={base}
             error={baseError}
+            isLoading={isLoading}
             onChange={setBase}
             onSubmit={onStepDone}
           />
