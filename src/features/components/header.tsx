@@ -21,9 +21,9 @@ const Header = () => {
           <Logo src={logo} />
           <ItemList>
             <NavLinkItem to="/dashboard">Apps</NavLinkItem>
-            <NavLinkItem to="/templates">Templates</NavLinkItem>
-            <NavLinkItem to="/billing">Billing</NavLinkItem>
-            <NavLinkItem to="/help">Help</NavLinkItem>
+            {/*<NavLinkItem to="/templates">Templates</NavLinkItem>*/}
+            {/*<NavLinkItem to="/billing">Billing</NavLinkItem>*/}
+            {/*<NavLinkItem to="/help">Help</NavLinkItem>*/}
           </ItemList>
         </LogoContainer>
         <LoginInfo>{email}</LoginInfo>
