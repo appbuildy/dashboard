@@ -1,0 +1,54 @@
+.custom-button.ant-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-weight: inherit;
+  border-width: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.custom-button.ant-btn:hover {
+  opacity: 0.7;
+}
+.custom-button.ant-btn:active {
+  opacity: 0.85;
+}
+
+.custom-button.ant-btn>span {
+  font-weight: inherit;
+}
+
+.custom-button--border.ant-btn {
+  padding: 0 0;
+  color: #007aff;
+  height: 36px;
+  background-color: transparent;
+  border-radius: 6px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #007aff;
+}
+
+.custom-button--general.ant-btn {
+  padding: 0 16px;
+  color: #fff;
+  background-image: linear-gradient(to bottom, #00b1ff, #0077f5);
+}
+
+.custom-button--light.ant-btn {
+  padding: 0 16px;
+  color: #000;
+  background-image: linear-gradient(180deg, #eaf6ff 0%, #b3dfff 100%);
+}
+
+.custom-button--big.ant-btn {
+  height: 56px;
+  font-size: 20px;
+  border-radius: 14px;
+}
+
+.custom-button--normal.ant-btn {
+  height: 36px;
+  border-radius: 6px;
+}

@@ -29,7 +29,7 @@ const MyProjects: React.FC = () => {
 
   return (
     <Container>
-      <CreateProject onCreated={getProjects}/>
+      <CreateProject onCreated={(projectId) => history.push(`/platform/${projectId}`)}/>
       {projects.map((project: IProject) => (
         <ProjectCard
           key={project.id}
