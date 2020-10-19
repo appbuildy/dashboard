@@ -20,7 +20,14 @@ const Platform: React.FC<IPlatform> = ({ match: { params } }) => {
 
   return (
     <>
-      {isLoading && <Loader alt="loading" src={loading} />}
+      {isLoading && (
+        <LoaderContainer>
+          <LoaderFuckingContainer>
+            <Loader alt="loading" src={loading} />
+            <LoaderTitle>Loading the Project...</LoaderTitle>
+          </LoaderFuckingContainer>
+        </LoaderContainer>
+      )}
       <IframeStyled
         src={`https://www.appbuildy.com/projects/${id}/?project_id=${id}&jwt=${jwt}`}
         // @ts-ignore
@@ -39,14 +46,29 @@ const IframeStyled = styled.iframe`
   height: 100vh;
 `;
 
+const LoaderContainer = styled.div`
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+
+const LoaderFuckingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Loader = styled.img`
-  position: absolute;
-  margin: auto;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
   text-align: center;
   width: 150px;
   height: 150px;
+`;
+
+const LoaderTitle = styled.div`
+  margin-top: 20px;
+  font-size: 34px;
+  font-weight: bold;
 `;
