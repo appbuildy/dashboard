@@ -65,27 +65,27 @@ const Register = () => {
         <Form onSubmit={handleCredentials}>
           <Title>Sign Up</Title>
           <ButtonContainer>
-            <Button size="big" type="light" onClick={handleGoogle}>
-              <ButtonAlign>
-                <Social>
-                  <img alt="google icon" src={googleSvg} />
-                </Social>
-                Continue with Google
-                <CenterHelper />
-              </ButtonAlign>
-            </Button>
-            <SizedBox />
-            <Button size="big" onClick={handleFacebook}>
-              <ButtonAlign>
-                <Social>
-                  <img alt="google icon" src={facebookSvg} />
-                </Social>
-                Continue with Facebook
-                <CenterHelper />
-              </ButtonAlign>
-            </Button>
-            <SizedBox />
-            <SizedBox />
+            {/*<Button size="big" type="light" onClick={handleGoogle}>*/}
+            {/*  <ButtonAlign>*/}
+            {/*    <Social>*/}
+            {/*      <img alt="google icon" src={googleSvg} />*/}
+            {/*    </Social>*/}
+            {/*    Continue with Google*/}
+            {/*    <CenterHelper />*/}
+            {/*  </ButtonAlign>*/}
+            {/*</Button>*/}
+            {/*<SizedBox />*/}
+            {/*<Button size="big" onClick={handleFacebook}>*/}
+            {/*  <ButtonAlign>*/}
+            {/*    <Social>*/}
+            {/*      <img alt="google icon" src={facebookSvg} />*/}
+            {/*    </Social>*/}
+            {/*    Continue with Facebook*/}
+            {/*    <CenterHelper />*/}
+            {/*  </ButtonAlign>*/}
+            {/*</Button>*/}
+            {/*<SizedBox />*/}
+            {/*<SizedBox />*/}
             {error.length > 0 && (
               <>
                 <Error>{error}</Error>
@@ -217,12 +217,14 @@ const Actions = styled.div`
 
 const ActionText = styled.div`
   font-size: 18px;
-  opacity: 0.4;
   line-height: 22px;
-  color: #000;
+  color: #0077f5;
+  background: linear-gradient(to bottom, #00b1ff, #0077f5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   transition: all 0.2s ease-in-out;
 
   :hover {
-    opacity: 0.2;
+    opacity: 0.7;
   }
 `;

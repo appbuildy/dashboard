@@ -13,7 +13,6 @@ import {
 } from '../../../assets/authorization';
 
 const Login = () => {
-
   const history = useHistory();
   const dispatch: any = useDispatch();
 
@@ -62,27 +61,27 @@ const Login = () => {
         <Form>
           <Title>Log In</Title>
           <ButtonContainer>
-            <Button size="big" type="light" onClick={handleGoogle}>
-              <ButtonAlign>
-                <Social>
-                  <img alt="google icon" src={googleSvg} />
-                </Social>
-                Continue with Google
-                <CenterHelper />
-              </ButtonAlign>
-            </Button>
-            <SizedBox />
-            <Button size="big" onClick={handleFacebook}>
-              <ButtonAlign>
-                <Social>
-                  <img alt="google icon" src={facebookSvg} />
-                </Social>
-                Continue with Facebook
-                <CenterHelper />
-              </ButtonAlign>
-            </Button>
-            <SizedBox />
-            <SizedBox />
+            {/*<Button size="big" type="light" onClick={handleGoogle}>*/}
+            {/*  <ButtonAlign>*/}
+            {/*    <Social>*/}
+            {/*      <img alt="google icon" src={googleSvg} />*/}
+            {/*    </Social>*/}
+            {/*    Continue with Google*/}
+            {/*    <CenterHelper />*/}
+            {/*  </ButtonAlign>*/}
+            {/*</Button>*/}
+            {/*<SizedBox />*/}
+            {/*<Button size="big" onClick={handleFacebook}>*/}
+            {/*  <ButtonAlign>*/}
+            {/*    <Social>*/}
+            {/*      <img alt="google icon" src={facebookSvg} />*/}
+            {/*    </Social>*/}
+            {/*    Continue with Facebook*/}
+            {/*    <CenterHelper />*/}
+            {/*  </ButtonAlign>*/}
+            {/*</Button>*/}
+            {/*<SizedBox />*/}
+            {/*<SizedBox />*/}
             {error.length > 0 && (
               <>
                 <Error>{error}</Error>
@@ -115,7 +114,11 @@ const Login = () => {
           </Inputs>
           <Actions>
             <Link to="/signup">
-              <ActionText>Don’t have an account?</ActionText>
+              <ActionText>
+                {/*Don’t have an account yet?{' '}*/}
+                {/*Don't have an account?*/}
+                Don't have an account?
+              </ActionText>
             </Link>
             <Link to="">
               <ActionText>Forgot Password?</ActionText>
@@ -208,12 +211,16 @@ const Actions = styled.div`
 
 const ActionText = styled.div`
   font-size: 18px;
-  opacity: 0.4;
+  opacity: 1;
   line-height: 22px;
-  color: #000;
+  font-weight: 400;
+  color: #0077f5;
+  background: linear-gradient(to bottom, #00b1ff, #0077f5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   transition: all 0.2s ease-in-out;
 
   :hover {
-    opacity: 0.2;
+    opacity: 0.7;
   }
 `;
