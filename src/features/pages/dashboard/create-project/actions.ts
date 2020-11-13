@@ -2,10 +2,10 @@ import axios from 'axios';
 
 interface INewProject {
   name: string;
-  airtable_credentials: {
-    api_key: string;
-    base: string;
-  };
+  // airtable_credentials: {
+  //   api_key: string;
+  //   base: string;
+  // };
 }
 
 export const createProject = (newProject: INewProject) => {
