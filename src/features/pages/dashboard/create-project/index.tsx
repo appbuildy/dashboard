@@ -15,7 +15,6 @@ import {
 import { createProject } from './actions';
 import ModalCloseButton from '../../../../ui/modal-close-button';
 import CreateProjectCard from '../my-projects/create-project-card';
-import axios from 'axios';
 
 const StyledActiveZone = styled(ModalActiveZone)`
   padding: 30px 40px;
@@ -83,6 +82,7 @@ const CreateProject = () => {
               </StyledSubtitle>
               <Input
                 value={name}
+                autoFocus
                 onChange={e => setName(e.target.value)}
                 placeholder="Name of the App"
               />
