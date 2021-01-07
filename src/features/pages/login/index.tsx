@@ -22,8 +22,9 @@ const Login = () => {
   const [error, setError] = useState('');
 
   const handleGoogle = () => {
-    alert('google');
+    window.open('https://www.appbuildy.com/auth/google_oauth2/');
   };
+
   const handleFacebook = () => {
     window.open('https://www.appbuildy.com/auth/facebook');
   };
