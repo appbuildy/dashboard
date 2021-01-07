@@ -15,21 +15,23 @@ import Platform from '../pages/platform';
 import Templates from '../pages/templates';
 import Billing from '../pages/billing';
 import Help from '../pages/help';
+import Oauth from '../pages/oauth';
 
 const Routes = () => {
   return (
     <Router>
       <Switch>
         <PrivateRoute path="/dashboard" component={Dashboard} />
-        <PrivateRoute exact path="/platform/:id" component={Platform}/>
-        <PrivateRoute exact path="/templates" component={Templates}/>
-        <PrivateRoute exact path="/billing" component={Billing}/>
-        <PrivateRoute exact path="/help" component={Help}/>
+        <PrivateRoute exact path="/platform/:id" component={Platform} />
+        <PrivateRoute exact path="/templates" component={Templates} />
+        <PrivateRoute exact path="/billing" component={Billing} />
+        <PrivateRoute exact path="/help" component={Help} />
         <Route exact path="/">
           <Redirect to="dashboard" />
         </Route>
         <AuthorizationRoute path="/login" component={Login} />
         <AuthorizationRoute path="/signup" component={Register} />
+        <AuthorizationRoute path="/oauth" component={Oauth} />
         <Route path="*">
           <NotFound />
         </Route>

@@ -26,7 +26,7 @@ const Register = () => {
     alert('google');
   };
   const handleFacebook = () => {
-    alert('face');
+    window.open('https://www.appbuildy.com/auth/facebook');
   };
 
   const isValid = (): boolean => {
@@ -65,27 +65,27 @@ const Register = () => {
         <Form onSubmit={handleCredentials}>
           <Title>Sign Up</Title>
           <ButtonContainer>
-            {/*<Button size="big" type="light" onClick={handleGoogle}>*/}
-            {/*  <ButtonAlign>*/}
-            {/*    <Social>*/}
-            {/*      <img alt="google icon" src={googleSvg} />*/}
-            {/*    </Social>*/}
-            {/*    Continue with Google*/}
-            {/*    <CenterHelper />*/}
-            {/*  </ButtonAlign>*/}
-            {/*</Button>*/}
-            {/*<SizedBox />*/}
-            {/*<Button size="big" onClick={handleFacebook}>*/}
-            {/*  <ButtonAlign>*/}
-            {/*    <Social>*/}
-            {/*      <img alt="google icon" src={facebookSvg} />*/}
-            {/*    </Social>*/}
-            {/*    Continue with Facebook*/}
-            {/*    <CenterHelper />*/}
-            {/*  </ButtonAlign>*/}
-            {/*</Button>*/}
-            {/*<SizedBox />*/}
-            {/*<SizedBox />*/}
+            <Button size="big" type="light" onClick={handleGoogle}>
+              <ButtonAlign>
+                <Social>
+                  <img alt="google icon" src={googleSvg} />
+                </Social>
+                Continue with Google
+                <CenterHelper />
+              </ButtonAlign>
+            </Button>
+            <SizedBox />
+            <Button size="big" onClick={handleFacebook}>
+              <ButtonAlign>
+                <Social>
+                  <img alt="google icon" src={facebookSvg} />
+                </Social>
+                Continue with Facebook
+                <CenterHelper />
+              </ButtonAlign>
+            </Button>
+            <SizedBox />
+            <SizedBox />
             {error.length > 0 && (
               <>
                 <Error>{error}</Error>
