@@ -62,16 +62,16 @@ const Login = () => {
         <Form>
           <Title>Log In</Title>
           <ButtonContainer>
-            <Button size="big" type="light" onClick={handleGoogle}>
-              <ButtonAlign>
-                <Social>
-                  <img alt="google icon" src={googleSvg} />
-                </Social>
-                Continue with Google
-                <CenterHelper />
-              </ButtonAlign>
-            </Button>
-            <SizedBox />
+            {/*<Button size="big" type="light" onClick={handleGoogle}>*/}
+            {/*  <ButtonAlign>*/}
+            {/*    <Social>*/}
+            {/*      <img alt="google icon" src={googleSvg} />*/}
+            {/*    </Social>*/}
+            {/*    Continue with Google*/}
+            {/*    <CenterHelper />*/}
+            {/*  </ButtonAlign>*/}
+            {/*</Button>*/}
+            {/*<SizedBox />*/}
             <Button size="big" onClick={handleFacebook}>
               <ButtonAlign>
                 <Social>
