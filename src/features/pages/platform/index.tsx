@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import 'antd/dist/antd.css';
+import { Link } from 'react-router-dom';
 import loading from './loading.gif';
 import InvalidBrowserModal from '../../components/invalid-broswer/invalid-browser-modal';
 import { isInvalidBrowser } from '../../lib/isInvalidBrowser';
@@ -33,6 +34,7 @@ const Platform: React.FC<IPlatform> = ({ match: { params } }) => {
         // @ts-ignore
         onLoad={() => setIsLoading(false)}
       />
+      <LogoBack to={'/'} />
       {isInvalidBrowser && <InvalidBrowserModal />}
     </>
   );
@@ -44,6 +46,17 @@ const IframeStyled = styled.iframe`
   border: none;
   width: 100%;
   height: 100vh;
+`;
+
+const LogoBack = styled(Link)`
+  width: 80px;
+  height: 60px;
+  position: absolute;
+  cursor: pointer;
+  opacity: 0;
+  left: 0;
+  top: 0;
+  background: red;
 `;
 
 const LoaderContainer = styled.div`
