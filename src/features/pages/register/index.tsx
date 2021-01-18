@@ -1,16 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Input, PasswordInput, Button, Error } from '../../../ui';
 import { useHistory, Link } from 'react-router-dom';
 import { emailRegEx } from '../../lib/emailRegEx';
 import { register } from '../../../redux/application/actions';
 import { useDispatch } from 'react-redux';
-import {
-  bgSvg,
-  logoSvg,
-  facebookSvg,
-  googleSvg,
-} from '../../../assets/authorization';
+import { bgSvg, logoSvg, facebookSvg } from '../../../assets/authorization';
 
 const Register = () => {
   const history = useHistory();
@@ -22,9 +17,9 @@ const Register = () => {
 
   const [error, setError] = useState('');
 
-  const handleGoogle = () => {
-    window.open('https://www.appbuildy.com/auth/google_oauth2/');
-  };
+  // const handleGoogle = () => {
+  //   window.open('https://www.appbuildy.com/auth/google_oauth2/');
+  // };
 
   const handleFacebook = () => {
     window.open('https://www.appbuildy.com/auth/facebook');
@@ -41,6 +36,14 @@ const Register = () => {
 
     return !emailError && !passwordError && !secondPasswordError;
   };
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(history.location.search);
+    const parsedEmail = urlParams.get('email');
+    if (parsedEmail) {
+      setEmail(parsedEmail);
+    }
+  }, [history.location.search]);
 
   const handleCredentials = () => {
     setError('');
@@ -81,7 +84,7 @@ const Register = () => {
                 <Social>
                   <img alt="google icon" src={facebookSvg} />
                 </Social>
-                Continue with Facebook
+                Sign Up with Facebook
                 <CenterHelper />
               </ButtonAlign>
             </Button>
@@ -123,7 +126,7 @@ const Register = () => {
             />
             <BigSizedBox />
             <Button onClick={handleCredentials} size={'big'}>
-              Continue
+              Sign Up
             </Button>
           </Inputs>
           <Actions>

@@ -21,9 +21,9 @@ const Login = () => {
 
   const [error, setError] = useState('');
 
-  const handleGoogle = () => {
-    window.open('https://www.appbuildy.com/auth/google_oauth2/');
-  };
+  // const handleGoogle = () => {
+  //   window.open('https://www.appbuildy.com/auth/google_oauth2/');
+  // };
 
   const handleFacebook = () => {
     window.open('https://www.appbuildy.com/auth/facebook');
@@ -77,7 +77,7 @@ const Login = () => {
                 <Social>
                   <img alt="google icon" src={facebookSvg} />
                 </Social>
-                Continue with Facebook
+                Log in with Facebook
                 <CenterHelper />
               </ButtonAlign>
             </Button>
@@ -110,7 +110,7 @@ const Login = () => {
             />
             <BigSizedBox />
             <Button onClick={handleCredentials} size={'big'}>
-              Continue
+              Log In
             </Button>
           </Inputs>
           <Actions>
@@ -121,9 +121,9 @@ const Login = () => {
                 Don't have an account?
               </ActionText>
             </Link>
-            <Link to="">
-              <ActionText>Forgot Password?</ActionText>
-            </Link>
+            {/*<Link to="">*/}
+            {/*  <ActionText>Forgot Password?</ActionText>*/}
+            {/*</Link>*/}
           </Actions>
         </Form>
       </Container>
@@ -207,7 +207,7 @@ const Inputs = styled.div``;
 const Actions = styled.div`
   margin-top: 32px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 const ActionText = styled.div`
