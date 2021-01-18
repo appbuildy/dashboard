@@ -34,9 +34,7 @@ const CreateProjectCard: React.FC<CardProps> = ({ onClick }) => {
         <Info>
           <InfoIcon src={CreateAppIcon} />
           <StyledCardDescription>
-            <CardName title={'Create App'}>
-              Create App
-            </CardName>
+            <CardName title={'Create App'}>Create App</CardName>
           </StyledCardDescription>
         </Info>
       </CardFooter>

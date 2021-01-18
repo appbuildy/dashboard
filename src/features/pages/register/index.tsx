@@ -6,6 +6,7 @@ import { emailRegEx } from '../../lib/emailRegEx';
 import { register } from '../../../redux/application/actions';
 import { useDispatch } from 'react-redux';
 import { bgSvg, logoSvg, facebookSvg } from '../../../assets/authorization';
+import mixpanel from 'mixpanel-browser';
 
 const Register = () => {
   const history = useHistory();
@@ -55,10 +56,16 @@ const Register = () => {
       };
 
       dispatch(register(user))
-        .then(() => history.push('/dashboard'))
-        .catch(() => {
+        .then(() => {
+          mixpanel.track('sign up');
+          history.push('/dashboard');
+        })
+        .catch((e: any) => {
           setError('This email already exist');
+          mixpanel.track('sign up', { error: e.message });
         });
+    } else {
+      mixpanel.track('sign up', { invalid: true });
     }
   };
 
@@ -130,7 +137,7 @@ const Register = () => {
             </Button>
           </Inputs>
           <Actions>
-            <Link to="/login">
+            <Link onClick={() => mixpanel.track('to login link clicked')} to="/login">
               <ActionText>Already have an account?</ActionText>
             </Link>
           </Actions>

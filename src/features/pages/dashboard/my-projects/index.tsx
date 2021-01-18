@@ -9,6 +9,7 @@ import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import { IProject } from '../../../../redux/dashboard/interfaces';
 import { RootState } from '../../../../redux/store';
+import mixpanel from 'mixpanel-browser';
 
 TimeAgo.addLocale(en);
 
@@ -44,7 +45,10 @@ const MyProjects: React.FC = () => {
             photo={project.photo}
             gradient={project.gradient}
             updatedAt={timeAgo.format(new Date(project.updated_at))}
-            onClick={() => history.push(`/platform/${project.id}`)}
+            onClick={() => {
+              mixpanel.track('project click', { 'project id': project.id });
+              history.push(`/platform/${project.id}`);
+            }}
           />
         ))}
     </Container>

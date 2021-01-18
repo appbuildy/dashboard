@@ -11,6 +11,7 @@ import {
   facebookSvg,
   googleSvg,
 } from '../../../assets/authorization';
+import mixpanel from 'mixpanel-browser';
 
 const Login = () => {
   const history = useHistory();
@@ -48,10 +49,16 @@ const Login = () => {
       };
 
       dispatch(login(user))
-        .then(() => history.push('/dashboard'))
-        .catch(() => {
+        .then(() => {
+          mixpanel.track('log in');
+          history.push('/dashboard');
+        })
+        .catch((e: any) => {
           setError('Wrong e-mail or password');
+          mixpanel.track('log in', { error: e.message });
         });
+    } else {
+      mixpanel.track('log in', { invalid: true });
     }
   };
 
@@ -114,12 +121,11 @@ const Login = () => {
             </Button>
           </Inputs>
           <Actions>
-            <Link to="/signup">
-              <ActionText>
-                {/*Don’t have an account yet?{' '}*/}
-                {/*Don't have an account?*/}
-                Don't have an account?
-              </ActionText>
+            <Link
+              onClick={() => mixpanel.track('to signup link clicked')}
+              to="/signup"
+            >
+              <ActionText>Don't have an account?</ActionText>
             </Link>
             {/*<Link to="">*/}
             {/*  <ActionText>Forgot Password?</ActionText>*/}

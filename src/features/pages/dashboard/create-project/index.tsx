@@ -15,6 +15,7 @@ import {
 import { createProject } from './actions';
 import ModalCloseButton from '../../../../ui/modal-close-button';
 import CreateProjectCard from '../my-projects/create-project-card';
+import mixpanel from 'mixpanel-browser';
 
 const StyledActiveZone = styled(ModalActiveZone)`
   padding: 30px 40px;
@@ -56,6 +57,7 @@ const CreateProject = () => {
   };
 
   const closeModal = () => {
+    mixpanel.track('create project', { name: name });
     setIsOpen(false);
     setName('');
   };
@@ -98,7 +100,12 @@ const CreateProject = () => {
         <ModalCloseButton closeModal={closeModal} />
       </Modal>
 
-      <CreateProjectCard onClick={() => setIsOpen(true)} />
+      <CreateProjectCard
+        onClick={() => {
+          setIsOpen(true);
+          mixpanel.track('create project', { 'open modal click': true });
+        }}
+      />
     </>
   );
 };
