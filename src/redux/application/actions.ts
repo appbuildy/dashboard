@@ -3,8 +3,8 @@ import * as services from './services';
 import { setUser } from './reducer';
 import { IUser, IUserResponse } from './interfaces';
 
-export const login = (user: IUser) => (dispatch: Dispatch): Promise<any> => (
- new Promise((resolve, reject) => {
+export const login = (user: IUser) => (dispatch: Dispatch): Promise<any> =>
+  new Promise((resolve, reject) => {
     services
       .login(user)
       .then((response: IUserResponse) => {
@@ -15,32 +15,30 @@ export const login = (user: IUser) => (dispatch: Dispatch): Promise<any> => (
 
         resolve();
       })
-      .catch((error) => {
-        reject(error)
-      })
-  })
-);
+      .catch(error => {
+        reject(error);
+      });
+  });
 
-export const register = (user: IUser) => (dispatch: Dispatch): Promise<any> => (
+export const register = (user: IUser) => (dispatch: Dispatch): Promise<any> =>
   new Promise((resolve, reject) => {
     services
       .register(user)
       .then((response: IUserResponse) => {
-        const { jwt, ...rest } = response;
+        services.login(user).then(loginResponse => {
+          const { jwt, ...rest } = loginResponse;
 
-        localStorage.setItem('jwt', jwt);
-        dispatch(setUser(rest));
+          localStorage.setItem('jwt', jwt);
+          dispatch(setUser(rest));
 
-        resolve();
+          resolve();
+        });
       })
-      .catch((error) => {
-        reject(error)
-      })
-  })
-);
+      .catch(error => {
+        reject(error);
+      });
+  });
 
 export const me = () => (dispatch: Dispatch) => {
-  services
-    .me()
-    .then((response: IUserResponse) =>  dispatch(setUser(response)));
-}
+  services.me().then((response: IUserResponse) => dispatch(setUser(response)));
+};
