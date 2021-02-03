@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import 'antd/dist/antd.css';
 import { Link } from 'react-router-dom';
@@ -18,6 +18,18 @@ const Platform: React.FC<IPlatform> = ({ match: { params } }) => {
   const { id } = params;
   const [isLoading, setIsLoading] = useState(true);
   const jwt = localStorage.getItem('jwt');
+
+  useEffect(() => {
+    document.body.style.margin = '0';
+    document.body.style.height = '100%';
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.margin = '0';
+      document.body.style.height = '100%';
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
 
   return (
     <>
