@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import 'antd/dist/antd.css';
-import { Link } from 'react-router-dom';
-import loading from './loading.gif';
+import loading from '../platform/loading.gif';
 import InvalidBrowserModal from '../../components/invalid-broswer/invalid-browser-modal';
 import { isInvalidBrowser } from '../../lib/isInvalidBrowser';
 import { useBlockScroll } from '../../lib/useBlockScroll';
@@ -18,9 +17,14 @@ interface IPlatform {
 const Platform: React.FC<IPlatform> = ({ match: { params } }) => {
   const { id } = params;
   const [isLoading, setIsLoading] = useState(true);
-  const jwt = localStorage.getItem('jwt');
+  const [projectId, setProjectId] = useState<string | null>();
 
   useBlockScroll();
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    setProjectId(urlParams.get('project_id'));
+  }, []);
 
   return (
     <>
@@ -28,16 +32,17 @@ const Platform: React.FC<IPlatform> = ({ match: { params } }) => {
         <LoaderContainer>
           <LoaderFuckingContainer>
             <Loader alt="loading" src={loading} />
-            <LoaderTitle>Loading the Project...</LoaderTitle>
+            <LoaderTitle>Loading...</LoaderTitle>
           </LoaderFuckingContainer>
         </LoaderContainer>
       )}
-      <IframeStyled
-        src={`https://www.appbuildy.com/projects/${id}/?project_id=${id}&jwt=${jwt}`}
-        // @ts-ignore
-        onLoad={() => setIsLoading(false)}
-      />
-      <LogoBack to={'/'} />
+      {projectId && (
+        <IframeStyled
+          src={`https://www.appbuildy.com/projects/${id}?preview_mode=enabled&project_id=${projectId}`}
+          // @ts-ignore
+          onLoad={() => setIsLoading(false)}
+        />
+      )}
       {isInvalidBrowser && <InvalidBrowserModal />}
     </>
   );
@@ -47,19 +52,8 @@ export default Platform;
 
 const IframeStyled = styled.iframe`
   border: none;
-  width: 100%;
-  height: 100vh;
-`;
-
-const LogoBack = styled(Link)`
-  width: 80px;
-  height: 60px;
-  position: absolute;
-  cursor: pointer;
-  opacity: 0;
-  left: 0;
-  top: 0;
-  background: red;
+  width: 375px;
+  height: 850px;
 `;
 
 const LoaderContainer = styled.div`
