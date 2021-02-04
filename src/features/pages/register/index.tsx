@@ -6,6 +6,8 @@ import { emailRegEx } from '../../lib/emailRegEx';
 import { register } from '../../../redux/application/actions';
 import { useDispatch } from 'react-redux';
 import { bgSvg, logoSvg, facebookSvg } from '../../../assets/authorization';
+import Chaport from '../../components/chaport';
+
 import mixpanel from 'mixpanel-browser';
 
 const Register = () => {
@@ -70,80 +72,86 @@ const Register = () => {
   };
 
   return (
-    <Wrapper>
-      <Container>
-        <Logo src={logoSvg} />
-        <Form onSubmit={handleCredentials}>
-          <Title>Sign Up</Title>
-          <ButtonContainer>
-            {/*<Button size="big" type="light" onClick={handleGoogle}>*/}
-            {/*  <ButtonAlign>*/}
-            {/*    <Social>*/}
-            {/*      <img alt="google icon" src={googleSvg} />*/}
-            {/*    </Social>*/}
-            {/*    Continue with Google*/}
-            {/*    <CenterHelper />*/}
-            {/*  </ButtonAlign>*/}
-            {/*</Button>*/}
-            {/*<SizedBox />*/}
-            <Button size="big" onClick={handleFacebook}>
-              <ButtonAlign>
-                <Social>
-                  <img alt="google icon" src={facebookSvg} />
-                </Social>
-                Sign Up with Facebook
-                <CenterHelper />
-              </ButtonAlign>
-            </Button>
-            <SizedBox />
-            <SizedBox />
-            {error.length > 0 && (
-              <>
-                <Error>{error}</Error>
-                <SizedBox />
-              </>
-            )}
-          </ButtonContainer>
-          <Inputs>
-            <Input
-              value={email}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setEmail(e.target.value)
-              }
-              size="big"
-              placeholder="E-mail"
-            />
-            <SizedBox />
-            <PasswordInput
-              value={password}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setPassword(e.target.value)
-              }
-              size="big"
-              placeholder="Password"
-            />
-            <SizedBox />
-            <PasswordInput
-              value={secondPassword}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setSecondPassword(e.target.value)
-              }
-              size="big"
-              placeholder="Password Again"
-            />
-            <BigSizedBox />
-            <Button onClick={handleCredentials} size={'big'}>
-              Sign Up
-            </Button>
-          </Inputs>
-          <Actions>
-            <Link onClick={() => mixpanel.track('to login link clicked')} to="/login">
-              <ActionText>Already have an account?</ActionText>
-            </Link>
-          </Actions>
-        </Form>
-      </Container>
-    </Wrapper>
+    <>
+      <Chaport />
+      <Wrapper>
+        <Container>
+          <Logo src={logoSvg} />
+          <Form onSubmit={handleCredentials}>
+            <Title>Sign Up</Title>
+            <ButtonContainer>
+              {/*<Button size="big" type="light" onClick={handleGoogle}>*/}
+              {/*  <ButtonAlign>*/}
+              {/*    <Social>*/}
+              {/*      <img alt="google icon" src={googleSvg} />*/}
+              {/*    </Social>*/}
+              {/*    Continue with Google*/}
+              {/*    <CenterHelper />*/}
+              {/*  </ButtonAlign>*/}
+              {/*</Button>*/}
+              {/*<SizedBox />*/}
+              <Button size="big" onClick={handleFacebook}>
+                <ButtonAlign>
+                  <Social>
+                    <img alt="google icon" src={facebookSvg} />
+                  </Social>
+                  Sign Up with Facebook
+                  <CenterHelper />
+                </ButtonAlign>
+              </Button>
+              <SizedBox />
+              <SizedBox />
+              {error.length > 0 && (
+                <>
+                  <Error>{error}</Error>
+                  <SizedBox />
+                </>
+              )}
+            </ButtonContainer>
+            <Inputs>
+              <Input
+                value={email}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setEmail(e.target.value)
+                }
+                size="big"
+                placeholder="E-mail"
+              />
+              <SizedBox />
+              <PasswordInput
+                value={password}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setPassword(e.target.value)
+                }
+                size="big"
+                placeholder="Password"
+              />
+              <SizedBox />
+              <PasswordInput
+                value={secondPassword}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setSecondPassword(e.target.value)
+                }
+                size="big"
+                placeholder="Password Again"
+              />
+              <BigSizedBox />
+              <Button onClick={handleCredentials} size={'big'}>
+                Sign Up
+              </Button>
+            </Inputs>
+            <Actions>
+              <Link
+                onClick={() => mixpanel.track('to login link clicked')}
+                to="/login"
+              >
+                <ActionText>Already have an account?</ActionText>
+              </Link>
+            </Actions>
+          </Form>
+        </Container>
+      </Wrapper>
+    </>
   );
 };
 

@@ -6,15 +6,15 @@ import Header from '../../components/header';
 import MyProjects from './my-projects';
 import InvalidBrowserMessage from '../../components/invalid-broswer/invalid-browser-message';
 import { isInvalidBrowser } from '../../lib/isInvalidBrowser';
+import Chaport from '../../components/chaport';
 
 const Dashboard = () => {
   return (
     <Container>
+      <Chaport />
       <Header />
       <Content margin={`${isInvalidBrowser ? 20 : 32}px auto`}>
-        {isInvalidBrowser && (
-          <InvalidBrowserMessage />
-        )}
+        {isInvalidBrowser && <InvalidBrowserMessage />}
         <MyProjects />
       </Content>
     </Container>

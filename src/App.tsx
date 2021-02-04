@@ -21,7 +21,7 @@ function App() {
   );
 
   useEffect(() => {
-    // dispatch(me());
+    dispatch(me());
   }, [dispatch]);
 
   useEffect(() => {

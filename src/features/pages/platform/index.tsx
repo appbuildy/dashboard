@@ -6,6 +6,7 @@ import loading from './loading.gif';
 import InvalidBrowserModal from '../../components/invalid-broswer/invalid-browser-modal';
 import { isInvalidBrowser } from '../../lib/isInvalidBrowser';
 import { useBlockScroll } from '../../lib/useBlockScroll';
+import Chaport from '../../components/chaport';
 
 interface IPlatform {
   match: {
@@ -24,6 +25,7 @@ const Platform: React.FC<IPlatform> = ({ match: { params } }) => {
 
   return (
     <>
+      <Chaport />
       {isLoading && (
         <LoaderContainer>
           <LoaderFuckingContainer>
