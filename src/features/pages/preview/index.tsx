@@ -28,6 +28,22 @@ const Platform: React.FC<IPlatform> = ({ match: { params } }) => {
     setProjectId(urlParams.get('project_id'));
   }, []);
 
+  useEffect(() => {
+    let vh = window.innerHeight * 0.01;
+    // Then we set the value in the --vh custom property to the root of the document
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+    const cb = () => {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+    window.addEventListener('resize', cb);
+
+    return () => {
+      window.removeEventListener('resize', cb);
+    };
+  });
+
   return (
     <PreviewWrapper>
       {projectId && (
@@ -91,8 +107,8 @@ const IframeStyled = styled.iframe`
 
   @media (max-width: 600px) {
     width: 100%;
-    height: 100vh;
-  }
+    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    height: calc(var(--vh, 1vh) * 100); 
 `;
 
 const PreviewContainer = styled.div`
@@ -109,6 +125,11 @@ const PreviewCenter = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    justify-content: start;
+  }
 `;
 
 const IphoneContainer = styled.img`
