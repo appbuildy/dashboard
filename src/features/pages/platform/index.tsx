@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import 'antd/dist/antd.css';
 import { Link } from 'react-router-dom';
@@ -25,6 +26,25 @@ const Platform: React.FC<IPlatform> = ({ match: { params } }) => {
 
   return (
     <>
+      {!isLoading && (
+        <Helmet
+          script={[
+            {
+              type: 'text/javascript',
+              innerHTML: `(function (w, d, s) {
+                var a = d.getElementsByTagName('head')[0];
+                var r = d.createElement('script');
+                r.async = 1;
+                r.src = s;
+                r.setAttribute('id', 'usetifulScript');
+                r.dataset.token = "d48a64dfab8da1aa5cca0e968b96cb98";
+                        a.appendChild(r);
+              })(window, document, "https://www.usetiful.com/dist/usetiful.js");
+              `,
+            },
+          ]}
+        />
+      )}
       <Chaport />
       {isLoading && (
         <LoaderContainer>

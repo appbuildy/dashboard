@@ -28,3 +28,17 @@ body {
   font-weight: 500;
   color: #000000;
 }
+
+
+.uf-bubble-content{
+  font-weight: 500 !important;
+}
+
+.uf-button-primary {
+  background: #007aff !important;
+  border-color: #007aff !important;
+}
+
+.uf-free-badge{
+  display: none !important;
+}
