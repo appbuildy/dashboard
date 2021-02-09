@@ -21,6 +21,8 @@ const Platform: React.FC<IPlatform> = ({ match: { params } }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [projectId, setProjectId] = useState<string | null>();
 
+  const [scale, setScale] = useState(1);
+
   useBlockScroll();
 
   useEffect(() => {
@@ -44,12 +46,32 @@ const Platform: React.FC<IPlatform> = ({ match: { params } }) => {
     };
   });
 
+  useEffect(() => {
+    const cb = () => {
+      const heightScaled = window.innerHeight / 1000;
+      const widthScaled = window.innerWidth / 1000;
+
+      if (window.innerHeight <= 899 || window.innerWidth <= 1140) {
+        setScale(heightScaled < widthScaled ? heightScaled : widthScaled);
+      } else {
+        setScale(1);
+      }
+    };
+
+    cb();
+    window.addEventListener('resize', cb);
+
+    return () => {
+      window.removeEventListener('resize', cb);
+    };
+  }, []);
+
   return (
     <PreviewWrapper>
       {projectId && (
         <>
           <PreviewCenter>
-            <PreviewContainer>
+            <PreviewContainer scale={scale}>
               {/* for local testing purposes */}
               {/*<IframeStyled*/}
               {/*  src={`http://0.0.0.0:8989/?preview_mode=enabled&project_id=${projectId}&url=https://www.appbuildy.com`}*/}
@@ -111,12 +133,14 @@ const IframeStyled = styled.iframe`
     height: calc(var(--vh, 1vh) * 100); 
 `;
 
-const PreviewContainer = styled.div`
+const PreviewContainer = styled.div<{ scale: number }>`
   width: 450px;
   position: relative;
+  transform: scale(${p => p.scale});
 
   @media (max-width: 600px) {
     width: 100%;
+    transform: scale(1);
   }
 `;
 
