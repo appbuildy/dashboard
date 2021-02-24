@@ -17,6 +17,7 @@ import Billing from '../pages/billing';
 import Help from '../pages/help';
 import Oauth from '../pages/oauth';
 import Preview from '../pages/preview';
+import Payment from '../pages/payment';
 
 const Routes = () => {
   return (
@@ -34,6 +35,7 @@ const Routes = () => {
         <AuthorizationRoute path="/signup" component={Register} />
         <AuthorizationRoute path="/oauth" component={Oauth} />
         <Route exact path="/preview/:id" component={Preview} />
+        <Route exact path="/payment" component={Payment} />
         <Route path="*">
           <NotFound />
         </Route>
